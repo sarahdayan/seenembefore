@@ -1,47 +1,9 @@
 define(
-	['services/Validator', 'services/Event', 'services/Api', 'jquery'],
-	function(Validator, Event, Api, $) {
+	['services/Validator', 'services/Event', 'services/Api', 'models/Search',
+	'models/Show', 'models/Character', 'jquery'],
+	function(Validator, Event, Api, Search, Show, Character, $) {
 
 	var AppModel = function() {
-		this.search = {
-			character: {
-				value: null,
-				validator: ['isString', 'isNotEmpty'/*, ['hasMinLength', 2], ['isEqualTo', 'Jaha']*/]
-			},
-			show: {
-				value: null,
-				validator: ['isString', 'isNotEmpty']
-			}
-		};
-		this.show = {
-			name: {
-				value: null,
-				validator: ['isString', 'isNotEmpty']
-			},
-			id: {
-				value: null,
-				validator: ['isInt', 'isNotEmpty']
-			},
-			cast: {
-				value: {},
-				validator: ['isNotEmpty']
-			}
-		};
-		this.character = {
-			matches: {
-				value: [],
-				validator: ['isArray', 'isNotEmpty']
-			},
-			selected: {
-				value: null,
-				validator: ['isInt', 'isNotEmpty'],
-				credits: {
-					value: [],
-					validator: ['isArray', 'isNotEmpty']
-				}
-			}
-		};
-
 		this.api = new Api();
 		this.validator = new Validator();
 
@@ -49,95 +11,96 @@ define(
 		this.setCharacterEvent = new Event(this);
 		this.setShowEvent = new Event(this);
 		this.setCharacterMatchesEvent = new Event(this);
-		this.getPersonCreditsEvent = new Event(this);
+		this.setSelectedCreditsEvent = new Event(this);
 	};
 
-	AppModel.prototype.set = function(value, key) {
-		if (this.validator.validate(value, key.validator)) {
-			key.value = value;
-			return true;
-		}
-		return false;
+	AppModel.prototype.init = function() {
+		this.search = new Search();
+		this.show = new Show();
+		this.character = new Character();
 	};
 
 	AppModel.prototype.setSearch = function(search) {
-		this.set(search.character, this.search.character);
-		this.set(search.show, this.search.show);
-
+		this.search.setCharacter(search.character);
+		this.search.setShow(search.show);
 		this.setSearchEvent.notify();
 	};
 
 	AppModel.prototype.setCharacter = function(character) {
-		this.set(character.id, this.character.selected);
-
+		this.character.setSelected(character.id);
 		this.setCharacterEvent.notify();
 	};
 
-	AppModel.prototype.setCharacterMatches = function() {
+	AppModel.prototype.findCharacterMatches = function() {
 		var self = this, matches = [];
-		this.show.cast.value.forEach(function(character) {
+		this.show.getCast().forEach(function(character) {
 			if (self.validator.isIn(
-				self.search.character.value.toLowerCase(),
+				self.search.getCharacter().toLowerCase(),
 				character.character.name.toLowerCase()
 			)) matches.push(character.character.id);
 		});
-		this.set(matches, this.character.matches);
+		return matches;
+	};
 
+	AppModel.prototype.setCharacterMatches = function(matches) {
+		this.character.setMatches(matches);
 		this.setCharacterMatchesEvent.notify();
 	};
 
 	AppModel.prototype.setShow = function() {
 		var self = this;
-		this.api.singleSearch(this.search.show.value, ['cast'])
+		this.api.singleSearch(this.search.getShow(), ['cast'])
 			.done(function(data) {
-				self.set(data.name, self.show.name);
-				self.set(data.id, self.show.id);
-				self.set(data._embedded.cast, self.show.cast);
-
+				self.show.setName(data.name);
+				self.show.setId(data.id);
+				self.show.setCast(data._embedded.cast);
 				self.setShowEvent.notify();
 			});
 	};
 
 	AppModel.prototype.findCharacterById = function(characterID) {
-		for (var i = 0; i < this.show.cast.value.length; i++) {
-			if (this.show.cast.value[i].character.id === characterID) {
-				return this.show.cast.value[i];
+		for (var i = 0; i < this.show.getCast().length; i++) {
+			if (this.show.getCast()[i].character.id === characterID) {
+				return this.show.getCast()[i];
 			}
 		}
 		return -1;
 	};
 
 	AppModel.prototype.findPersonById = function(personID) {
-		for (var i = 0; i < this.show.cast.value.length; i++) {
-			if (this.show.cast.value[i].person.id === personID) {
-				return this.show.cast.value[i].person;
+		for (var i = 0; i < this.show.getCast().length; i++) {
+			if (this.show.getCast()[i].person.id === personID) {
+				return this.show.getCast()[i].person;
 			}
 		}
 		return -1;
 	};
 
-	AppModel.prototype.getPersonCredits = function(personID) {
+	AppModel.prototype.setSelectedCredits = function(personID) {
 		var self = this;
 		this.api.castCredits(personID, ['show'])
 			.done(function(data) {
 				var personCredits = [], promises = [];
 				data.forEach(function(credit) {
-					(function(showName) {
+					(function(showName, showID) {
 						var promise = $.getJSON(credit._links.character.href, function(data) {
-							if (self.show.name.value !== showName) {
-								personCredits.push({
-									name: data.name,
-									show: showName
-								});
-							}
+							personCredits.push({
+								id: data.name,
+								name: data.name,
+								image: data.image ? data.image.original : null,
+								show: {
+									id: showID,
+									name: showName
+								}
+							});
 						});
 						promises.push(promise);
-					})(credit._embedded.show.name);
+					})(credit._embedded.show.name, credit._embedded.show.id);
 				});
 				$.when.apply($, promises)
 					.done(function() {
-						self.set(personCredits, self.character.selected.credits);
-						self.getPersonCreditsEvent.notify();
+						self.character.setCredits(personCredits);
+						self.setSelectedCreditsEvent.notify();
 					});
 			});
 	};

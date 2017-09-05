@@ -1,4 +1,4 @@
-define(['services/Event', 'jquery', 'handlebars'], function(Event, $, Handlebars) {
+define(['helpers/HandlebarsHelpers', 'services/Event', 'jquery', 'handlebars'], function(HandlebarsHelpers, Event, $, Handlebars) {
 
 	var AppView = function(model) {
 		this.model = model;
@@ -11,6 +11,7 @@ define(['services/Event', 'jquery', 'handlebars'], function(Event, $, Handlebars
 
 	AppView.prototype.init = function() {
 		this.createChildren()
+			.registerHelpers()
 			.setupHandlers()
 			.enable();
 	};
@@ -38,7 +39,7 @@ define(['services/Event', 'jquery', 'handlebars'], function(Event, $, Handlebars
 		this.personButtonHandler = this.inputUserCharacterChoice.bind(this);
 		this.setSearchEventHandler = this.render.bind(this);
 		this.setCharacterMatchesEventHandler = this.render.bind(this);
-		this.getPersonCreditsEventHandler = this.render.bind(this);
+		this.setSelectedCreditsHandler = this.render.bind(this);
 		return this;
 	};
 
@@ -47,7 +48,14 @@ define(['services/Event', 'jquery', 'handlebars'], function(Event, $, Handlebars
 		this.$document.on('click', this.personButtonSelector, this.personButtonHandler);
 		this.model.setSearchEvent.attach(this.setSearchEventHandler);
 		this.model.setCharacterMatchesEvent.attach(this.setCharacterMatchesEventHandler);
-		this.model.getPersonCreditsEvent.attach(this.getPersonCreditsEventHandler);
+		this.model.setSelectedCreditsEvent.attach(this.setSelectedCreditsHandler);
+		return this;
+	};
+
+	AppView.prototype.registerHelpers = function() {
+		for (var fn in HandlebarsHelpers) {
+			Handlebars.registerHelper(fn, HandlebarsHelpers[fn]);
+		}
 		return this;
 	};
 
@@ -64,23 +72,24 @@ define(['services/Event', 'jquery', 'handlebars'], function(Event, $, Handlebars
 
 	AppView.prototype.renderQuery = function() {
 		var self = this, characters = [];
-		this.model.character.matches.value.forEach(function(match) {
+		this.model.character.getMatches().forEach(function(match) {
 			characters.push(self.model.findCharacterById(match));
 		});
 		this.$queryArea.html(
 			this.queryTemplate({
 				entry: characters,
-				show: this.model.show.name.value
+				show: this.model.show.getName()
 			})
 		);
 		return this;
 	};
 
 	AppView.prototype.renderResults = function() {
-		var person = this.model.findPersonById(this.model.character.selected.value);
+		var person = this.model.findPersonById(this.model.character.getSelected());
 		this.$resultsArea.html(this.resultsTemplate({
 			person: person.name,
-			entry: this.model.character.selected.credits.value
+			show: this.model.show.getId(),
+			entry: this.model.character.getCredits()
 		}));
 		return this;
 	};

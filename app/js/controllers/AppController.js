@@ -15,21 +15,27 @@ define(['services/Validator'], function(Validator) {
 	};
 
 	AppController.prototype.setupHandlers = function() {
-		this.inputUserSearchEventHandler = this.saveSearch.bind(this);
-		this.inputUserCharacterChoiceEventHandler = this.saveCharacter.bind(this);
-		this.setSearchEventHandler = this.saveShow.bind(this);
-		this.setShowEventHandler = this.saveCharacterMatches.bind(this);
-		this.setCharacterEventHandler = this.fetchPersonCredits.bind(this);
+		this.startNewSearchHandler = this.startNewSearch.bind(this);
+		this.saveSearchHandler = this.saveSearch.bind(this);
+		this.saveCharacterHandler = this.saveCharacter.bind(this);
+		this.saveShowHandler = this.saveShow.bind(this);
+		this.saveCharacterMatchesHandler = this.saveCharacterMatches.bind(this);
+		this.savePersonCreditsHandler = this.savePersonCredits.bind(this);
 		return this;
 	};
 
 	AppController.prototype.enable = function() {
-		this.view.inputUserSearchEvent.attach(this.inputUserSearchEventHandler);
-		this.view.inputUserCharacterChoiceEvent.attach(this.inputUserCharacterChoiceEventHandler);
-		this.model.setSearchEvent.attach(this.setSearchEventHandler);
-		this.model.setShowEvent.attach(this.setShowEventHandler);
-		this.model.setCharacterEvent.attach(this.setCharacterEventHandler);
+		this.view.inputUserSearchEvent.attach(this.startNewSearchHandler);
+		this.view.inputUserSearchEvent.attach(this.saveSearchHandler);
+		this.view.inputUserCharacterChoiceEvent.attach(this.saveCharacterHandler);
+		this.model.setSearchEvent.attach(this.saveShowHandler);
+		this.model.setShowEvent.attach(this.saveCharacterMatchesHandler);
+		this.model.setCharacterEvent.attach(this.savePersonCreditsHandler);
 		return this;
+	};
+
+	AppController.prototype.startNewSearch = function() {
+		this.model.init();
 	};
 
 	AppController.prototype.saveSearch = function(sender, args) {
@@ -43,18 +49,20 @@ define(['services/Validator'], function(Validator) {
 		this.model.setShow();
 	};
 
+	AppController.prototype.saveCharacterMatches = function() {
+		var matches = this.model.findCharacterMatches();
+		this.model.setCharacterMatches(matches);
+	};
+
 	AppController.prototype.saveCharacter = function(sender, args) {
 		this.model.setCharacter({
 			id: args.id
 		});
 	};
 
-	AppController.prototype.fetchPersonCredits = function() {
-		this.model.getPersonCredits(this.model.character.selected.value);
-	};
-
-	AppController.prototype.saveCharacterMatches = function() {
-		this.model.setCharacterMatches();
+	AppController.prototype.savePersonCredits = function() {
+		var selected = this.model.character.getSelected();
+		this.model.setSelectedCredits(selected);
 	};
 
 	return AppController;

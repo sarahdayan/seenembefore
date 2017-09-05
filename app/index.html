@@ -24,6 +24,7 @@
 			<ul>
 				{{#each entry}}
 				<li>
+					<img width="100" height="100" src="{{this.character.image.original}}" alt="{{this.character.name}} in {{../show}}">
 					{{this.character.name}} ({{this.person.name}}) in "{{../show}}"
 					<button class="person" data-id="{{this.person.id}}">That's the one</button>
 				</li>
@@ -33,10 +34,15 @@
 		</script>
 		<script id="results-template" type="text/x-handlebars-template">
 			{{#if entry}}
-			<p>{{person}} also played in:</p>
+			<p>{{person}} also played:</p>
 			<ul>
 				{{#each entry}}
-				<li>{{this.name}} in "{{this.show}}"</li>
+				{{#compare this.show.id '!==' ../show}}
+				<li>
+					<img width="100" height="100" src="{{this.image}}" alt="{{this.name}} in {{this.show.name}}">
+					{{this.name}} in "{{this.show.name}}"
+				</li>
+				{{/compare}}
 				{{/each}}
 			</ul>
 			{{/if}}
