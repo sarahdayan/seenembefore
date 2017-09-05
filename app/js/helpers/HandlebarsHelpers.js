@@ -30,7 +30,7 @@ define(function() {
 				}
 				return options.inverse(this);
 			}
-		}
+		};
 	})();
 
 	return HandlebarsHelpers;

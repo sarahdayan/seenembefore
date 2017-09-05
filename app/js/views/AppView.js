@@ -1,4 +1,6 @@
-define(['helpers/HandlebarsHelpers', 'services/Event', 'jquery', 'handlebars'], function(HandlebarsHelpers, Event, $, Handlebars) {
+define(
+	['helpers/HandlebarsHelpers', 'services/Event', 'jquery', 'handlebars'],
+	function(HandlebarsHelpers, Event, $, Handlebars) {
 
 	var AppView = function(model) {
 		this.model = model;
