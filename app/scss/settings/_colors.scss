@@ -1,0 +1,27 @@
+// Colors
+//
+// All colors
+//
+// palette(purple, dark)  - #2F22C4, Persian Blue
+// palette(purple)        - #916FFC, Heliotrope
+// palette(purple, mid)   - #B44CDC, Medium Purple
+// palette(purple, light) - #E4DEFC, Selago
+// palette(black)         - #000000, Black
+//
+// Styleguide Settings.colors
+
+$palettes: (
+	black: (
+		base: #000000
+	),
+	purple: (
+		base: #916FFC,
+		dark: #2F22C4,
+		mid: #B44CDC,
+		light: #E4DEFC
+	)
+);
+
+@function palette($palette, $tone: 'base') {
+	@return map-get(map-get($palettes, $palette), $tone);
+}

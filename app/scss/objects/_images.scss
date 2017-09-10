@@ -1,0 +1,20 @@
+// Images
+//
+// All image styles
+//
+// Markup:
+// <img class="o-img o-img--responsive" alt="John Appleseed" src="http://fakeimg.pl/250x100">
+// <img class="o-img o-img--circle" alt="John Appleseed" src="http://fakeimg.pl/250">
+//
+// Styleguide Objects.images
+
+.o-img {
+	display: block;
+	&--responsive {
+		max-width: 100%;
+		height: auto;
+	}
+	&--circle {
+		border-radius: 50%;
+	}
+}

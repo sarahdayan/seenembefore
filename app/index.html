@@ -3,48 +3,101 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>seenembefore</title>
+		<link rel="stylesheet" type="text/css" href="css/app.css">
 	</head>
-	<body>
-		Character<br>
-		<input type="text" value="Jaha" id="character"><br>
-		Show<br>
-		<input type="text" value="The 100" id="show"><br>
-		<button id="submit">Search</button><br>
-		<div id="search"></div>
-		<div id="query"></div>
-		<div id="results"></div>
+	<body class="c-app">
+		<ul class="o-list o-list--inline c-nav c-app__nav">
+			<li class="u-margin-right-8">
+				<a class="c-nav__link" target="_blank" href="https://github.com/sarahdayan/seenembefore">
+					<i class="icon-logo-github"></i>
+				</a>
+			</li>
+			<li class="u-margin-left-8 u-margin-right-8">
+				<a class="c-nav__link" target="_blank" href="http://frontstuff.io/">
+					<i class="icon-blog"></i>
+				</a>
+			</li>
+			<li class="u-margin-left-8">
+				<a class="c-nav__link" target="_blank" href="#">
+					<i class="icon-info"></i>
+				</a>
+			</li>
+		</ul>
+		<section class="c-section u-text-center" id="form">
+			<form>
+				<p class="u-text-uppercase u-text-strong u-text-small u-text-letterspaced u-margin-bottom-48">Where did I see...</p>
+				<div class="u-text-xx-large">
+					<input class="c-form-control c-form-control--naked c-form-control--link" type="text" autocomplete="off" placeholder="Walter White" id="character">
+					from
+					<input class="c-form-control c-form-control--naked c-form-control--link" type="text" autocomplete="off" placeholder="Breaking Bad" id="show">?
+				</div>
+				<p class="u-text-uppercase u-text-strong u-text-small u-text-letterspaced u-margin-top-48">Press <button class="c-button c-button--link" id="submit">Enter</button> to find out</p>
+			</form>
+		</section>
+		<section class="c-section u-text-center u-hidden" id="search"></section>
+		<section class="c-section u-hidden" id="query"></section>
+		<section class="c-section u-hidden" id="results"></section>
 		<script id="search-template" type="text/x-handlebars-template">
 			{{#if character}}
-			<p><strong>You searched for:</strong> {{character.value}} in {{show.value}}</p>
+			<div>
+				<p>You asked for <strong class="u-text-capitalize">{{character.value}}</strong> in <strong class="u-text-capitalize">{{show.value}}</strong>,<br> we're looking that up for you...</p>
+			</div>
 			{{/if}}
 		</script>
 		<script id="query-template" type="text/x-handlebars-template">
 			{{#if entry}}
-			<p><strong>We found:</strong></p>
-			<ul>
-				{{#each entry}}
-				<li>
-					<img width="100" height="100" src="{{this.character.image.original}}" alt="{{this.character.name}} in {{../show}}">
-					{{this.character.name}} ({{this.person.name}}) in "{{../show}}"
-					<button class="person" data-id="{{this.person.id}}">That's the one</button>
-				</li>
-				{{/each}}
-			</ul>
+			<div>
+				<ul class="o-list o-list--inline o-list--center u-text-center">
+					{{#each entry}}
+					<li class="u-margin-right-48 u-margin-top-24 u-margin-bottom-24">
+						<div class="o-media-object o-media-object--column character">
+							<div class="o-img o-img--circle character__avatar u-margin-bottom-16" style="background-image: url({{this.character.image.original}})"></div>
+							<div>
+								<h3 class="character__title">{{this.character.name}}</h3>
+								<h4 class="character__subtitle u-margin-bottom-16">{{this.person.name}}</h4>
+								<button class="js-person c-button u-text-small" data-id="{{this.person.id}}">That's the one</button>
+							</div>
+						</div>
+					</li>
+					{{/each}}
+				</ul>
+			</div>
 			{{/if}}
 		</script>
 		<script id="results-template" type="text/x-handlebars-template">
 			{{#if entry}}
-			<p>{{person}} also played:</p>
-			<ul>
-				{{#each entry}}
-				{{#compare this.show.id '!==' ../show}}
-				<li>
-					<img width="100" height="100" src="{{this.image}}" alt="{{this.name}} in {{this.show.name}}">
-					{{this.name}} in "{{this.show.name}}"
-				</li>
-				{{/compare}}
-				{{/each}}
-			</ul>
+			<div id="carousel" class="c-carousel c-carousel--full">
+				<div class="c-carousel__arrow c-carousel__arrow--prev js-carouselPreviousButton">
+					<i class="icon-arrow-left"></i>
+				</div>
+				<div class="c-carousel__content">
+					<div class="c-carousel__outer">
+						<div class="c-carousel__inner u-padding-top-40 u-padding-bottom-40 js-carouselSlider">
+							{{#each entry}}
+							{{#compare this.show.id '!==' ../show}}
+							<div class="c-carousel__slide js-carouselSlide">
+								<div class="o-media-object o-media-object--center character character--big">
+									{{#if this.image}}
+									<div class="o-img o-img--circle character__avatar u-margin-right-24" style="background-image: url({{this.image}})"></div>
+									{{else}}
+									<img class="o-img o-img--circle character__avatar u-margin-right-24" src="images/avatar-placeholder.svg" alt="{{this.name}} in {{this.show.name}}">
+									{{/if}}
+									<div>
+										<h3 class="character__title">{{this.name}}</h3>
+										<h4 class="character__subtitle">{{../person}}</h4>
+										<h5 class="character__subtitle character__subtitle--secondary">{{this.show.name}}</h5>
+									</div>
+								</div>
+							</div>
+							{{/compare}}
+							{{/each}}
+						</div>
+					</div>
+				</div>
+				<div class="c-carousel__arrow c-carousel__arrow--next js-carouselNextButton">
+					<i class="icon-arrow-right"></i>
+				</div>
+			</div>
 			{{/if}}
 		</script>
 		<!-- build:js js/app.min.js -->

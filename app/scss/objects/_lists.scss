@@ -1,0 +1,23 @@
+// Lists
+//
+// All list styles
+//
+// Markup:
+// <ul class="o-list">
+//     <li>John Appleseed</li>
+//     <li>Mark Twain</li>
+// </ul>
+//
+// .o-list--inline - An inline list.
+//
+// Styleguide Objects.lists
+
+.o-list {
+	&--inline {
+		display: flex;
+		flex-wrap: wrap;
+	}
+	&--center {
+		justify-content: center;
+	}
+}

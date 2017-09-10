@@ -1,0 +1,12 @@
+.c-app {
+	background: url('../images/bg-pattern.png'), linear-gradient(palette(purple, dark), palette(purple, mid));
+	font-family: $font-family;
+	font-size: $font-size;
+	line-height: $line-height;
+	color: $font-color;
+	&__nav {
+		position: absolute;
+		bottom: $spacing-unit * 4;
+		right: $spacing-unit * 5;
+	}
+}

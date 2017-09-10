@@ -1,0 +1,32 @@
+// Media objects
+//
+// The media objects
+//
+// Markup:
+// <div class="o-media-object {{modifier_class}}">
+//     <img src="http://fakeimg.pl/100" alt="John Appleseed">
+//     <div>
+//         John Appleseed<br>
+//         CEO, Apple Co.
+//     </div>
+// </div>
+//
+// .o-media-object--inverted - An inverted media object.
+// .o-media-object--column - A media object in column.
+//
+// Styleguide Objects.media-objects
+
+.o-media-object {
+	display: flex;
+	width: auto;
+	align-items: center;
+	&--center {
+		justify-content: center;
+	}
+	&--inverted {
+		flex-direction: row-reverse;
+	}
+	&--column {
+		flex-direction: column;
+	}
+}

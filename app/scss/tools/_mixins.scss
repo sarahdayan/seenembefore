@@ -1,0 +1,95 @@
+@mixin mobile {
+	@media (max-width: #{$grid-breakpoint-s}) {
+		@content;
+	}
+}
+
+@mixin tablet {
+	@media (min-width: #{$grid-breakpoint-s + 1px}) and (max-width: #{$grid-breakpoint-m - 1px}) {
+		@content;
+	}
+}
+
+@mixin desktop {
+	@media (min-width: #{$grid-breakpoint-m}) {
+		@content;
+	}
+}
+
+@mixin responsive-versions {
+	@include mobile {
+		&\@mobile {
+			@content;
+		}
+	}
+	@include tablet {
+		&\@tablet {
+			@content;
+		}
+	}
+	@include desktop {
+		&\@desktop {
+			@content;
+		}
+	}
+}
+
+@mixin spacing($value, $breakpoint) {
+	.u-margin {
+		&-top-#{strip-unit($value) * 10}#{$breakpoint} {
+			margin-top: $value;
+		}
+		&-bottom-#{strip-unit($value) * 10}#{$breakpoint} {
+			margin-bottom: $value;
+		}
+		&-left-#{strip-unit($value) * 10}#{$breakpoint} {
+			margin-left: $value;
+		}
+		&-right-#{strip-unit($value) * 10}#{$breakpoint} {
+			margin-right: $value;
+		}
+	}
+	.u-padding {
+		&-top-#{strip-unit($value) * 10}#{$breakpoint} {
+			padding-top: $value;
+		}
+		&-bottom-#{strip-unit($value) * 10}#{$breakpoint} {
+			padding-bottom: $value;
+		}
+		&-left-#{strip-unit($value) * 10}#{$breakpoint} {
+			padding-left: $value;
+		}
+		&-right-#{strip-unit($value) * 10}#{$breakpoint} {
+			padding-right: $value;
+		}
+	}
+}
+
+@mixin placeholder($color) {
+	&::-webkit-input-placeholder {
+		color: $color;
+		opacity: 1;
+	}
+	&::-moz-placeholder {
+		color: $color;
+		opacity: 1;
+	}
+	&:-ms-input-placeholder {
+		color: $color;
+		opacity: 1;
+	}
+	&:-moz-placeholder {
+		color: $color;
+		opacity: 1;
+	}
+}
+
+@mixin linear-gradient($direction, $color-stops...) {
+	@if is-direction($direction) == false {
+		$color-stops: $direction, $color-stops;
+		$direction: 180deg;
+	}
+	background: nth(nth($color-stops, 1), 1);
+	background: -webkit-linear-gradient(legacy-direction($direction), $color-stops);
+	background: linear-gradient($direction, $color-stops);
+}

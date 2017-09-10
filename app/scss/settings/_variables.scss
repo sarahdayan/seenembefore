@@ -1,0 +1,33 @@
+$spacing-unit:        .8rem;
+
+$spaces: $spacing-unit $spacing-unit * 2 $spacing-unit * 3 $spacing-unit * 4 $spacing-unit * 5 $spacing-unit * 6;
+
+/* Font */
+
+$font-family:      'europa';
+$font-weight-bold: 700;
+$font-color:       palette(purple);
+$font-size:        $spacing-unit * 3;
+$font-size-s:      $spacing-unit * 2;
+$font-size-l:      $spacing-unit * 4;
+$font-size-xl:     $spacing-unit * 5;
+$font-size-xxl:    $spacing-unit * 6;
+$line-height:      $spacing-unit * 4;
+$line-height-s:    $spacing-unit * 3;
+$line-height-l:    $spacing-unit * 5;
+$line-height-xl:   $spacing-unit * 6;
+$line-height-xxl:  $spacing-unit * 7;
+
+
+/* Contextual colors */
+
+$link-color: palette(purple, light);
+
+/* Grid */
+
+$grid-width:          1200px;
+$grid-col-gutter:     $spacing-unit * 3 / 2;
+$grid-columns-length: 12;
+$grid-breakpoint-l:   960px;
+$grid-breakpoint-m:   768px;
+$grid-breakpoint-s:   480px;

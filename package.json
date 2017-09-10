@@ -16,6 +16,8 @@
     "gulp-cache": "^0.4.6",
     "gulp-cssnano": "^2.1.2",
     "gulp-htmlmin": "^3.0.0",
+    "gulp-iconfont": "^9.0.1",
+    "gulp-iconfont-css": "^2.1.0",
     "gulp-if": "^2.0.2",
     "gulp-imagemin": "^3.3.0",
     "gulp-jshint": "^2.0.4",
@@ -28,8 +30,10 @@
     "run-sequence": "^2.1.0"
   },
   "dependencies": {
+    "autosize-input": "^0.4.0",
     "handlebars": "^4.0.10",
     "jquery": "^3.2.1",
-    "requirejs": "^2.3.4"
+    "requirejs": "^2.3.4",
+    "reset-css": "^2.2.1"
   }
 }

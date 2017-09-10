@@ -1,0 +1,77 @@
+// Grid
+//
+// The grid
+//
+// Markup:
+// <div class="o-grid">
+//     <div class="o-grid__row">
+//         <div class="o-grid__column o-grid__column--6">6</div>
+//         <div class="o-grid__column o-grid__column--6">6</div>
+//     </div>
+//     <div class="o-grid__row o-grid__row--reverse">
+//         <div class="o-grid__column o-grid__column--1">1</div>
+//         <div class="o-grid__column o-grid__column--2">2</div>
+//         <div class="o-grid__column o-grid__column--3">3</div>
+//         <div class="o-grid__column o-grid__column--4">4</div>
+//         <div class="o-grid__column o-grid__column--2">2</div>
+//     </div>
+// </div>
+// <div class="o-grid o-grid--full">
+//     <div class="o-grid__row">
+//         <div class="o-grid__column o-grid__column--2">2</div>
+//         <div class="o-grid__column o-grid__column--1">1</div>
+//         <div class="o-grid__column o-grid__column--3">3</div>
+//         <div class="o-grid__column o-grid__column--2">2</div>
+//         <div class="o-grid__column o-grid__column--2">2</div>
+//         <div class="o-grid__column o-grid__column--2">2</div>
+//     </div>
+//     <div class="o-grid__row">
+//         <div class="o-grid__column o-grid__column--4 o-grid__column--offset-2">4</div>
+//         <div class="o-grid__column o-grid__column--3">3</div>
+//         <div class="o-grid__column o-grid__column--1">1</div>
+//     </div>
+// </div>
+//
+// Styleguide Objects.grid
+
+.o-grid {
+	width: 100%;
+	max-width: $grid-width;
+	margin: 0 auto;
+	overflow-x: hidden;
+	&__row {
+		display: flex;
+		margin-left: -#{$grid-col-gutter};
+		margin-right: -#{$grid-col-gutter};
+		@include mobile {
+			flex-direction: column;
+			margin: 0;
+		}
+		&--reverse {
+			flex-direction: row-reverse;
+			@include mobile {
+				flex-direction: column-reverse;
+			}
+		}
+	}
+	&__column {
+		margin-left: $grid-col-gutter;
+		margin-right: $grid-col-gutter;
+		@for $i from 1 through $grid-columns-length {
+			&--#{$i} {
+				width: calc((100% / (#{$grid-columns-length} / #{$i})) - (#{$grid-col-gutter} * 2));
+			}
+			&--offset-#{$i} {
+				margin-left: calc((100% / (#{$grid-columns-length} / #{$i})) + #{$grid-col-gutter});
+			}
+			@include mobile {
+				width: 100%;
+				margin: 0;
+			}
+		}
+	}
+	&--full {
+		max-width: none;
+		margin: 0;
+	}
+}

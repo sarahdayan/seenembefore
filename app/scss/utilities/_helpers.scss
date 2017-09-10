@@ -1,0 +1,232 @@
+// Hidden
+//
+// Hides anything
+//
+// Markup:
+// <div class="u-hidden">Hidden</div>
+// <div class="u-hidden@mobile">Hidden for mobile devices</div>
+// <div class="u-hidden@tablet">Hidden for tablet devices</div>
+// <div class="u-hidden@desktop">Hidden for desktop devices</div>
+//
+// Styleguide Utilities.Helpers.hidden
+
+.u-hidden {
+	display: none;
+	@include responsive-versions {
+		display: none;
+	}
+}
+
+// Pointer
+//
+// Sets a pointer cursor on any element
+//
+// Markup:
+// <span class="u-pointer">Pointer cursor</span>
+//
+// Styleguide Utilities.Helpers.pointer
+
+.u-pointer {
+	cursor: pointer;
+}
+
+// Text
+//
+// All text manipulations (all benefit from @mobile, @tablet and @desktop modifiers)
+//
+// Markup:
+// <div class="u-text-left">Text left</div>
+// <div class="u-text-left@mobile">Text left on mobile devices</div>
+// <div class="u-text-left@tablet">Text left on tablet devices</div>
+// <div class="u-text-left@desktop">Text left on desktop devices</div>
+// <div class="u-text-right">Text right</div>
+// <div class="u-text-center">Text center</div>
+// <div class="u-text-justify">Text justify</div>
+// <div class="u-text-lowercase">Text lowercase</div>
+// <div class="u-text-uppercase">Text uppercase</div>
+// <div class="u-text-capitalize">Text capitalize</div>
+//
+// Styleguide Utilities.Helpers.text
+
+.u-text {
+	&-left {
+		text-align: left;
+		@include responsive-versions {
+			text-align: left;
+		}
+	}
+	&-right {
+		text-align: right;
+		@include responsive-versions {
+			text-align: right;
+		}
+	}
+	&-center {
+		text-align: center;
+		@include responsive-versions {
+			text-align: center;
+		}
+	}
+	&-justify {
+		text-align: justify;
+		@include responsive-versions {
+			text-align: justify;
+		}
+	}
+	&-lowercase {
+		text-transform: lowercase;
+		@include responsive-versions {
+			text-transform: lowercase;
+		}
+	}
+	&-uppercase {
+		text-transform: uppercase;
+		@include responsive-versions {
+			text-transform: uppercase;
+		}
+	}
+	&-capitalize {
+		text-transform: capitalize;
+		@include responsive-versions {
+			text-transform: capitalize;
+		}
+	}
+	&-strong {
+		font-weight: $font-weight-bold;
+	}
+	&-letterspaced {
+		letter-spacing: $spacing-unit / 4;
+	}
+	&-small {
+		font-size: $font-size-s;
+		line-height: $line-height-s;
+		@include responsive-versions {
+			font-size: $font-size-s;
+			line-height: $line-height-s;
+		}
+	}
+	&-large {
+		font-size: $font-size-l;
+		line-height: $line-height-l;
+		@include responsive-versions {
+			font-size: $font-size-l;
+			line-height: $line-height-l;
+		}
+	}
+	&-x-large {
+		font-size: $font-size-xl;
+		line-height: $line-height-xl;
+		@include responsive-versions {
+			font-size: $font-size-xl;
+			line-height: $line-height-xl;
+		}
+	}
+	&-xx-large {
+		font-size: $font-size-xxl;
+		line-height: $line-height-xxl;
+		@include responsive-versions {
+			font-size: $font-size-xxl;
+			line-height: $line-height-xxl;
+		}
+	}
+}
+
+// Margins and paddings
+//
+// Margin and padding utilities (all benefit from @mobile, @tablet and @desktop modifiers)
+//
+// Markup:
+// <div class="u-no-margin">A marginless element</div>
+// <div class="u-no-padding">A paddingless element</div>
+// <div class="u-margin-bottom-8">A .8rem bottom margin</div>
+// <div class="u-margin-top-16">A 1.6rem top margin</div>
+// <div class="u-margin-left-24">A 2.4rem left margin</div>
+// <div class="u-margin-right-32">A 3.2rem right margin</div>
+// <div class="u-margin-bottom-40">A 4rem bottom margin</div>
+// <div class="u-margin-bottom-48">A 4.8rem bottom margin</div>
+// <div class="u-margin-bottom-8@mobile">A .8rem bottom margin on mobile devices</div>
+// <div class="u-margin-top-16@mobile">A 1.6rem top margin on mobile devices</div>
+// <div class="u-margin-left-24@mobile">A 2.4rem left margin on mobile devices</div>
+// <div class="u-margin-right-32@mobile">A 3.2rem right margin on mobile devices</div>
+// <div class="u-margin-bottom-40@mobile">A 4rem bottom margin on mobile devices</div>
+// <div class="u-margin-bottom-48@mobile">A 4.8rem bottom margin on mobile devices</div>
+// <div class="u-padding-bottom-8">A .8rem bottom padding</div>
+// <div class="u-padding-top-16">A 1.6rem top padding</div>
+// <div class="u-padding-left-24">A 2.4rem left padding</div>
+// <div class="u-padding-right-32">A 3.2rem right padding</div>
+// <div class="u-padding-bottom-40">A 4rem bottom padding</div>
+// <div class="u-padding-bottom-48">A 4.8rem bottom padding</div>
+//
+// Styleguide Utilities.Helpers.margins-and-paddings
+
+.u-no-margin {
+	margin: 0 !important;
+}
+
+.u-no-padding {
+	padding: 0 !important;
+}
+
+@each $value in $spaces {
+	@include spacing($value, '');
+	@include mobile {
+		@include spacing($value, \@mobile)
+	}
+	@include tablet {
+		@include spacing($value, \@tablet)
+	}
+	@include desktop {
+		@include spacing($value, \@desktop)
+	}
+}
+
+// Pull
+//
+// Floats anything to the left or to the right
+//
+// Markup:
+// <div class="u-pull-left">Pull left</div>
+// <div class="u-pull-left@mobile">Pull left for mobile devices</div>
+// <div class="u-pull-left@tablet">Pull left for tablet devices</div>
+// <div class="u-pull-left@desktop">Pull left for desktop devices</div>
+// <div class="u-pull-right">Pull right</div>
+//
+// Styleguide Utilities.Helpers.pull
+
+.u-pull {
+	&-left {
+		float: left;
+		@include responsive-versions {
+			float: left;
+		}
+	}
+	&-right {
+		float: right;
+		@include responsive-versions {
+			float: right;
+		}
+	}
+}
+
+// Clearfix
+//
+// Clears floating at the end of any container
+//
+// Markup:
+// <div class="u-clearfix">
+//     <div class="u-pull-left">Pull left</div>
+//     <div class="u-pull-right">Pull right</div>
+// </div>
+//
+// Styleguide Utilities.Helpers.clearfix
+
+.u-clearfix {
+	&:before,
+	&:after {
+		content: ' ';
+		display: table;
+	}
+	&:after {
+		clear: both;
+	}
+}

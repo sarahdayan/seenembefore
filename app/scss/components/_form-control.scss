@@ -1,0 +1,11 @@
+.c-form-control {
+	color: inherit;
+	@include placeholder(inherit);
+	&--naked {
+		background: none;
+	}
+	&--link {
+		color: $link-color;
+		@include placeholder($link-color);
+	}
+}

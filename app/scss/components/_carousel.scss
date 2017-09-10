@@ -1,0 +1,34 @@
+.c-carousel {
+	display: flex;
+	align-items: center;
+	&__arrow {
+		width: $spacing-unit * 10;
+		text-align: center;
+		color: palette(purple, light);
+		cursor: pointer;
+		opacity: .2;
+		transition: all .2s ease-out;
+		@extend .u-text-xx-large;
+		&:hover {
+			opacity: .4;
+		}
+	}
+	&__content {
+		width: calc(100% - #{$spacing-unit * 20});
+	}
+	&__outer {
+		overflow: hidden;
+	}
+	&__inner {
+		position: relative;
+		left: 0;
+		display: flex;
+		transition: all .2s ease-out;
+	}
+	&__slide {
+		flex: 1 0 100%;
+	}
+	&--full {
+		width: 100%;
+	}
+}

@@ -1,0 +1,24 @@
+.c-button {
+	padding: $spacing-unit / 2 $spacing-unit * 2;
+	background: none;
+	color: $link-color;
+	border: $spacing-unit / 2 solid rgba(palette(purple, light), .3);
+	border-radius: $spacing-unit * 10;
+	cursor: pointer;
+	transition: all .1s ease-out;
+	&:hover {
+		background: palette(purple, light);
+		border-color: palette(purple, light);
+		color: inherit;
+	}
+	&--primary {
+		&:hover {
+
+		}
+	}
+	&--link {
+		display: inline;
+		padding: 0;
+		border: none;
+	}
+}

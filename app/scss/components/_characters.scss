@@ -1,0 +1,32 @@
+.character {
+	$block: &;
+	&__avatar {
+		width: $spacing-unit * 10;
+		height: $spacing-unit * 10;
+		background-size: cover;
+		background-position: center center;
+		box-shadow: 0 0 5rem 0 rgba(palette(black), .3);
+	}
+	&__title {
+		color: palette(purple, light);
+	}
+	&__subtitle {
+		color: palette(purple);
+		@extend .u-text-uppercase;
+		@extend .u-text-letterspaced;
+		@extend .u-text-small;
+		&--secondary {
+			color: palette(purple, light);
+			@extend .u-text-strong;
+		}
+	}
+	&--big {
+		#{$block}__avatar {
+			width: $spacing-unit * 15;
+			height: $spacing-unit * 15;
+		}
+		#{$block}__title {
+			@extend .u-text-large;
+		}
+	}
+}

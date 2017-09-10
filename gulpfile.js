@@ -30,7 +30,7 @@ var options = {
 	// ----- Default ----- //
 
 	default: {
-		tasks: ['sass','browserSync', 'watch']
+		tasks: ['sass', 'browserSync', 'watch']
 	},
 
 	// ----- Browser Sync ----- //
@@ -44,6 +44,18 @@ var options = {
 	sass: {
 		files: 'app/scss/**/*.scss',
 		destination: 'app/css'
+	},
+
+	// ----- Icon Font ----- //
+
+	icons: {
+		files      : 'app/svg/**/*',
+		path       : 'app/fonts/scss/_icons-template.scss',
+		fontName   : 'icons',
+		targetPath : 'scss/_icons.scss',
+		fontPath   : '../fonts/',
+		fontName   : 'icons',
+		destination: 'app/fonts'
 	},
 
 	// ----- JS ----- //
@@ -84,7 +96,7 @@ var options = {
 	watch: {
 		sass: {
 			files: 'app/scss/**/*.scss',
-			callback: ['sass']
+			callback: ['sass', browserSync.reload]
 		},
 		html: {
 			files: 'app/*.html',
@@ -93,6 +105,10 @@ var options = {
 		js: {
 			files: 'app/js/**/*.js',
 			callback: ['jshint', browserSync.reload]
+		},
+		iconfont: {
+			files: 'app/svg/**/*.svg',
+			callback: ['iconfont', 'sass']
 		}
 	},
 
@@ -134,6 +150,24 @@ gulp.task('sass', function() {
 });
 
 // -------------------------------------
+//   Task: Icon Font
+// -------------------------------------
+
+gulp.task('iconfont', ['sass'], function() {
+	return gulp.src(options.icons.files)
+		.pipe(plugins.iconfontCss({
+			path: options.icons.path,
+			fontName: options.icons.fontName,
+			targetPath: options.icons.targetPath,
+			fontPath: options.icons.fontPath
+		}))
+		.pipe(plugins.iconfont({
+			fontName: options.icons.fontName
+		}))
+		.pipe(gulp.dest(options.icons.destination));
+});
+
+// -------------------------------------
 //   Task: JSHint
 // -------------------------------------
 
@@ -152,6 +186,7 @@ gulp.task('watch', ['browserSync', 'sass'], function() {
 	gulp.watch(options.watch.sass.files, options.watch.sass.callback);
 	gulp.watch(options.watch.html.files, options.watch.html.callback);
 	gulp.watch(options.watch.js.files, options.watch.js.callback);
+	gulp.watch(options.watch.iconfont.files, options.watch.iconfont.callback);
 })
 
 // -------------------------------------
