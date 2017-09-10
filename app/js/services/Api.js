@@ -1,5 +1,7 @@
 define(['jquery'], function($) {
 
+	'use strict';
+
 	var Api = function() {
 		this.baseUrl = 'http://api.tvmaze.com/';
 		this.endpoints = {

@@ -2,6 +2,8 @@ define(
 	['services/Validator', 'services/Event'],
 	function(Validator, Event) {
 
+	'use strict';
+
 	/**
 	 * Represents a character
 	 * @constructor
@@ -29,7 +31,7 @@ define(
 
 	/**
 	 * @function set
-	 * @description Validate then set a value with {@link services/Validator.js|(Validator)}
+	 * @description Validate then set a value with {@link Validator}
 	 * @param {mixed} value - the value to validate then set.
 	 * @param {mixed} key - the key to assign the value to.
 	 * @returns {boolean}

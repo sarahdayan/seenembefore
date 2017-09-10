@@ -1,5 +1,7 @@
 define(function() {
 
+	'use strict';
+
 	/**
 	 * Represents a validator.
 	 * @constructor
@@ -123,7 +125,7 @@ define(function() {
 	 * @returns {boolean}
 	 */
 	Validator.prototype.hasMinValue = function(value, minValue) {
-		return value.length >= minValue;
+		return value >= minValue;
 	};
 
 	/**
@@ -134,7 +136,7 @@ define(function() {
 	 * @returns {boolean}
 	 */
 	Validator.prototype.hasMaxValue = function(value, maxValue) {
-		return value.length <= maxValue;
+		return value <= maxValue;
 	};
 
 	return Validator;

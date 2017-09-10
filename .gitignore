@@ -1,3 +1,4 @@
 /node_modules
 /app/css/app.css
 /app/fonts/icons.*
+/app/js/mocks

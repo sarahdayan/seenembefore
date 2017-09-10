@@ -1,5 +1,7 @@
 define(['services/Validator', 'services/Event'], function(Validator, Event) {
 
+	'use strict';
+
 	/**
 	 * Represents a user search.
 	 * @constructor
@@ -7,7 +9,7 @@ define(['services/Validator', 'services/Event'], function(Validator, Event) {
 	var Search = function() {
 		this.character = {
 			value: null,
-			validator: ['isString', 'isNotEmpty'/*, ['hasMinLength', 2], ['isEqualTo', 'Jaha']*/]
+			validator: ['isString', 'isNotEmpty']
 		};
 		this.show = {
 			value: null,
@@ -22,7 +24,7 @@ define(['services/Validator', 'services/Event'], function(Validator, Event) {
 
 	/**
 	 * @function set
-	 * @description Validate then set a value with {@link services/Validator.js|(Validator)}
+	 * @description Validate then set a value with {@link Validator}
 	 * @param {mixed} value - the value to validate then set.
 	 * @param {mixed} key - the key to assign the value to.
 	 * @returns {boolean}

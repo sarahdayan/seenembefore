@@ -1,5 +1,7 @@
 define(function() {
 
+	'use strict';
+
 	/**
 	 * Represents an event.
 	 * @constructor
