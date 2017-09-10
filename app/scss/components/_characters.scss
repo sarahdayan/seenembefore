@@ -6,6 +6,9 @@
 		background-size: cover;
 		background-position: center center;
 		box-shadow: 0 0 5rem 0 rgba(palette(black), .3);
+		@include mobile {
+			box-shadow: 0 0 2rem 0 rgba(palette(black), .1);
+		}
 	}
 	&__title {
 		color: palette(purple, light);

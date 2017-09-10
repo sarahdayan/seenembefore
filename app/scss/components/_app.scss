@@ -8,5 +8,15 @@
 		position: absolute;
 		bottom: $spacing-unit * 4;
 		right: $spacing-unit * 5;
+		@include tablet {
+			left: auto;
+			right: auto;
+			width: 100%;
+		}
+		@include mobile {
+			left: auto;
+			right: auto;
+			width: 100%;
+		}
 	}
 }

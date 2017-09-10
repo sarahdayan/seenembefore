@@ -17,16 +17,26 @@
 // Styleguide Objects.media-objects
 
 .o-media-object {
+	$block: &;
 	display: flex;
 	width: auto;
 	align-items: center;
 	&--center {
 		justify-content: center;
+		@include responsive-versions {
+			justify-content: center;
+		}
 	}
 	&--inverted {
 		flex-direction: row-reverse;
+		@include responsive-versions {
+			flex-direction: row-reverse;
+		}
 	}
 	&--column {
 		flex-direction: column;
+		@include responsive-versions {
+			flex-direction: column;
+		}
 	}
 }

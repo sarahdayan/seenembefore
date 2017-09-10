@@ -16,8 +16,15 @@
 	&--inline {
 		display: flex;
 		flex-wrap: wrap;
+		@include responsive-versions {
+			display: flex;
+			flex-wrap: wrap;
+		}
 	}
 	&--center {
 		justify-content: center;
+		@include responsive-versions {
+			justify-content: center;
+		}
 	}
 }

@@ -11,14 +11,14 @@
 		border-color: palette(purple, light);
 		color: inherit;
 	}
-	&--primary {
-		&:hover {
-
-		}
-	}
 	&--link {
 		display: inline;
 		padding: 0;
 		border: none;
+		&:hover {
+			background: none;
+			border: none;
+			color: $link-color;
+		}
 	}
 }
