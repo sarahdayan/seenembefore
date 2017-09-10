@@ -57,8 +57,8 @@ define(function() {
 	 * @returns {boolean}
 	 */
 	Validator.prototype.isNotEmpty = function(value) {
-		if (value.length > 0 && value !== '' &&
-			value !== null && typeof value !== 'undefined') {
+		if ((Array.isArray(value) && value.length) ||
+			(value !== '' && value !== null && typeof value !== 'undefined')) {
 			return true;
 		}
 		return false;
