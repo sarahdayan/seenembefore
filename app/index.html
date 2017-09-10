@@ -27,9 +27,9 @@
 			<form>
 				<p class="u-text-uppercase u-text-strong u-text-small u-text-letterspaced u-margin-bottom-48">Where did I see...</p>
 				<div class="u-text-xx-large">
-					<input class="c-form-control c-form-control--naked c-form-control--link" type="text" autocomplete="off" value="Walter White" placeholder="Walter White" id="character">
+					<input class="c-form-control c-form-control--naked c-form-control--link" type="text" autocomplete="off" placeholder="Walter White" id="character">
 					from
-					<input class="c-form-control c-form-control--naked c-form-control--link" type="text" autocomplete="off" value="Breaking Bad" placeholder="Breaking Bad" id="show">?
+					<input class="c-form-control c-form-control--naked c-form-control--link" type="text" autocomplete="off" placeholder="Breaking Bad" id="show">?
 				</div>
 				<p class="u-text-uppercase u-text-strong u-text-small u-text-letterspaced u-margin-top-48">Press <button class="c-button c-button--link" id="submit">Enter</button> to find out</p>
 			</form>
@@ -50,11 +50,11 @@
 				<ul class="o-list o-list--inline o-list--center u-text-center">
 					{{#each entry}}
 					<li class="u-margin-left-24 u-margin-right-24 u-margin-top-24 u-margin-bottom-24">
-						<div class="o-media-object o-media-object--column character">
-							<div class="o-img o-img--circle character__avatar u-margin-bottom-16" style="background-image: url({{this.character.image.original}})"></div>
+						<div class="o-media-object o-media-object--column c-character">
+							<div class="o-img o-img--circle c-character__avatar u-margin-bottom-16" style="background-image: url({{this.character.image.original}})"></div>
 							<div>
-								<h3 class="character__title">{{this.character.name}}</h3>
-								<h4 class="character__subtitle u-margin-bottom-16">{{this.person.name}}</h4>
+								<h3 class="c-character__title">{{this.character.name}}</h3>
+								<h4 class="c-character__subtitle u-margin-bottom-16">{{this.person.name}}</h4>
 								<button class="js-person c-button u-text-small" data-id="{{this.person.id}}">That's the one</button>
 							</div>
 						</div>
@@ -76,16 +76,16 @@
 							{{#each entry}}
 							{{#compare this.show.id '!==' ../show}}
 							<div class="c-carousel__slide js-carouselSlide">
-								<div class="o-media-object o-media-object--center o-media-object--column@tablet o-media-object--column@mobile character character--big">
+								<div class="o-media-object o-media-object--center o-media-object--column@tablet o-media-object--column@mobile c-character c-character--big">
 									{{#if this.image}}
-									<div class="o-img o-img--circle character__avatar u-margin-right-24@desktop u-margin-bottom-24@tablet u-margin-bottom-24@mobile" style="background-image: url({{this.image}})"></div>
+									<div class="o-img o-img--circle c-character__avatar u-margin-right-24@desktop u-margin-bottom-24@tablet u-margin-bottom-24@mobile" style="background-image: url({{this.image}})"></div>
 									{{else}}
-									<img class="o-img o-img--circle character__avatar u-margin-right-24@desktop u-margin-bottom-24@tablet u-margin-bottom-24@mobile" src="images/avatar-placeholder.svg" alt="{{this.name}} in {{this.show.name}}">
+									<img class="o-img o-img--circle c-character__avatar u-margin-right-24@desktop u-margin-bottom-24@tablet u-margin-bottom-24@mobile" src="images/avatar-placeholder.svg" alt="{{this.name}} in {{this.show.name}}">
 									{{/if}}
 									<div class="u-text-center@tablet u-text-center@mobile">
-										<h3 class="character__title">{{this.name}}</h3>
-										<h4 class="character__subtitle">{{../person}}</h4>
-										<h5 class="character__subtitle character__subtitle--secondary">{{this.show.name}}</h5>
+										<h3 class="c-character__title">{{this.name}}</h3>
+										<h4 class="c-character__subtitle">{{../person}}</h4>
+										<h5 class="c-character__subtitle c-character__subtitle--secondary">{{this.show.name}}</h5>
 									</div>
 								</div>
 							</div>
