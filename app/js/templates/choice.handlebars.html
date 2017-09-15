@@ -1,0 +1,12 @@
+<div class="o-grid">
+	<div class="o-grid__row">
+		<div class="o-grid__column o-grid__column--10 o-grid__column--offset-1">
+			{{#if person}}
+				<p>You picked <strong class="u-text-capitalize">{{person.name}}</strong>, let's find out where you may have seen this person before...</p>
+			{{else}}
+				<p class="c-title u-margin-bottom-32">Sorry, we have no credits for that person.<p>
+				<p>We are limited to main characters so maybe you saw this person play a secondary character in another show, or in a movie. Check out <a href="http://www.imdb.com/" target="_blank">IMDB</a> for more exhaustive data.</p>
+			{{/if}}
+		</div>
+	</div>
+</div>

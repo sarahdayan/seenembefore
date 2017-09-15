@@ -9,6 +9,7 @@
 //   `gulp watch`
 //   `gulp sass`
 //   `gulp jshint`
+//   `gulp handlebars`
 //   `gulp browserSync`
 //   `gulp useref`
 //   `gulp clean`
@@ -30,7 +31,7 @@ var options = {
 	// ----- Default ----- //
 
 	default: {
-		tasks: ['sass', 'browserSync', 'watch']
+		tasks: ['sass', 'handlebars', 'browserSync', 'watch']
 	},
 
 	// ----- Browser Sync ----- //
@@ -62,6 +63,14 @@ var options = {
 
 	js: {
 		files: 'app/js/**/*.js'
+	},
+
+	// ----- Handlebars ----- //
+
+	handlebars: {
+		commands: {
+			precompile: 'handlebars app/js/templates/*.handlebars.html -f app/js/templates/templates.js -m'
+		}
 	},
 
 	// ----- Useref ----- //
@@ -104,7 +113,7 @@ var options = {
 		},
 		js: {
 			files: 'app/js/**/*.js',
-			callback: ['jshint', browserSync.reload]
+			callback: ['jshint', 'handlebars', browserSync.reload]
 		},
 		iconfont: {
 			files: 'app/svg/**/*.svg',
@@ -121,7 +130,7 @@ var options = {
 	// ----- Build ----- //
 
 	build: {
-		tasks: ['clean', 'useref', 'images', 'requirejs']
+		tasks: ['clean', 'useref', 'images', 'handlebars', 'requirejs']
 	}
 };
 
@@ -176,6 +185,14 @@ gulp.task('jshint', function() {
 		.pipe(plugins.jshint(jshintConfig))
 		.pipe(plugins.jshint.reporter('jshint-stylish'))
 		.pipe(plugins.jshint.reporter('fail'));
+});
+
+// -------------------------------------
+//   Task: Handlebars
+// -------------------------------------
+
+gulp.task('handlebars', function() {
+	return plugins.shell(options.handlebars.commands.precompile);
 });
 
 // -------------------------------------

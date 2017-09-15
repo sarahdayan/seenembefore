@@ -13,19 +13,19 @@ define(
 		this.templates = {
 			search: {
 				div: $('.js-section__search'),
-				template: $('#search-template')
+				template: $('#search')
 			},
 			query: {
 				div: $('.js-section__query'),
-				template: $('#query-template')
+				template: $('#query')
 			},
 			choice: {
 				div: $('.js-section__choice'),
-				template: $('#choice-template')
+				template: $('#choice')
 			},
 			results: {
 				div: $('.js-section__results'),
-				template: $('#results-template')
+				template: $('#results')
 			}
 		};
 
@@ -37,8 +37,7 @@ define(
 	 * @description Fires initial operations
 	 */
 	Layout.prototype.init = function() {
-		this.registerHelpers()
-			.compileTemplates();
+		this.registerHelpers();
 	};
 
 	/**
@@ -49,19 +48,6 @@ define(
 	Layout.prototype.registerHelpers = function() {
 		for (var fn in HandlebarsHelpers) {
 			Handlebars.registerHelper(fn, HandlebarsHelpers[fn]);
-		}
-		return this;
-	};
-
-	/**
-	 * @function compileTemplates
-	 * @description Compiles all templates
-	 * @returns {object}
-	 */
-	Layout.prototype.compileTemplates = function() {
-		for (var template in this.templates) {
-			this.templates[template].compiledTemplate =
-			Handlebars.compile(this.templates[template].template.html());
 		}
 		return this;
 	};
@@ -87,8 +73,7 @@ define(
 	 */
 	Layout.prototype.injectInSection = function(section, args) {
 		args = args || {};
-		this.templates[section].div
-			.html(this.templates[section].compiledTemplate(args));
+		this.templates[section].div.html(Handlebars.templates[section](args));
 		return this;
 	};
 
