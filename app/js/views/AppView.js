@@ -1,7 +1,8 @@
 define(
-	['helpers/HandlebarsHelpers', 'services/Event',
-	'jquery', 'handlebars', 'autosize-input', 'typekit', 'views/Carousel'],
-	function(HandlebarsHelpers, Event, $, Handlebars, AutosizeInput, Typekit, Carousel) {
+	['services/Event', 'jquery', 'handlebars', 'autosize-input', 'typekit',
+	'views/Carousel', 'views/Layout'],
+	function(
+		Event, $, Handlebars, AutosizeInput, Typekit, Carousel, Layout) {
 
 	'use strict';
 
@@ -12,6 +13,8 @@ define(
 	var AppView = function(model) {
 		this.model = model;
 		this.children = {};
+
+		this.layout = new Layout();
 
 		this.inputUserSearchEvent = new Event(this);
 		this.inputUserCharacterChoiceEvent = new Event(this);
@@ -25,8 +28,7 @@ define(
 	 */
 	AppView.prototype.init = function() {
 		this.createChildren()
-			.applyStyles()
-			.registerHelpers()
+			.initLayout()
 			.setupHandlers()
 			.enable();
 	};
@@ -38,22 +40,11 @@ define(
 	 */
 	AppView.prototype.createChildren = function() {
 		this.children.$document = $(document);
-		this.children.$characterInput = $('#character');
-		this.children.$showInput = $('#show');
-		this.children.$submitButton = $('#submit');
-		this.children.$formArea = $('#form');
-		this.children.$searchArea = $('#search');
-		this.children.$queryArea = $('#query');
-		this.children.$resultsArea = $('#results');
+		this.children.$characterInput = $('.js-form__character');
+		this.children.$showInput = $('.js-form__show');
+		this.children.$submitButton = $('.js-form__submit');
 
 		this.children.personButtonSelector = '.js-person';
-
-		/**
-		 * @todo Externalize this
-		 */
-		this.children.searchTemplate = Handlebars.compile($('#search-template').html());
-		this.children.queryTemplate = Handlebars.compile($('#query-template').html());
-		this.children.resultsTemplate = Handlebars.compile($('#results-template').html());
 
 		return this;
 	};
@@ -68,6 +59,7 @@ define(
 		this.personButtonHandler = this.inputUserCharacterChoice.bind(this);
 		this.setSearchEventHandler = this.renderSearch.bind(this);
 		this.setCharacterMatchesEventHandler = this.renderQuery.bind(this);
+		this.setCharacterEventHandler = this.renderChoice.bind(this);
 		this.setSelectedCreditsHandler = this.renderResults.bind(this);
 		return this;
 	};
@@ -82,52 +74,29 @@ define(
 		this.children.$document.on('click', this.children.personButtonSelector, this.personButtonHandler);
 		this.model.setSearchEvent.attach(this.setSearchEventHandler);
 		this.model.setCharacterMatchesEvent.attach(this.setCharacterMatchesEventHandler);
+		this.model.setCharacterEvent.attach(this.setCharacterEventHandler);
 		this.model.setSelectedCreditsEvent.attach(this.setSelectedCreditsHandler);
 		return this;
 	};
 
 	/**
-	 * @function registerHelpers
-	 * @description Registers all {@link HandlebarsHelpers}
-	 * @todo Externalize this
+	 * @function initLayout
+	 * @description Fires initial layout operations
 	 * @returns {object}
 	 */
-	AppView.prototype.registerHelpers = function() {
-		for (var fn in HandlebarsHelpers) {
-			Handlebars.registerHelper(fn, HandlebarsHelpers[fn]);
-		}
-		return this;
-	};
-
-	/**
-	 * @todo Break this down
-	 * @todo Externalize this
-	 */
-	AppView.prototype.applyStyles = function() {
+	AppView.prototype.initLayout = function() {
 		var self = this;
+		this.children.$characterInput.attr('placeholder', this.model.search.getCharacter());
+		this.children.$showInput.attr('placeholder', this.model.search.getShow());
 		Typekit.load({
 			async: true,
-			loading: function() {
-			},
 			active: function() {
-				setTimeout(function() {
-					autosizeInput(self.children.$characterInput.get(0));
-					autosizeInput(self.children.$showInput.get(0));
-					self.children.$characterInput.focus();
-				}, 500);
+				autosizeInput(self.children.$characterInput.get(0));
+				autosizeInput(self.children.$showInput.get(0));
+				self.children.$characterInput.focus();
 			}
 		});
 		return this;
-	};
-
-	/**
-	 * @function render
-	 * @description Performs all render methods
-	 */
-	AppView.prototype.render = function() {
-		this.renderSearch()
-			.renderQuery()
-			.renderResults();
 	};
 
 	/**
@@ -136,17 +105,13 @@ define(
 	 * @returns {object}
 	 */
 	AppView.prototype.renderSearch = function() {
-		this.children.$formArea.addClass('u-hidden');
-		this.children.$searchArea
-			.removeClass('u-hidden')
-			.html(this.children.searchTemplate(this.model.search));
+		this.layout.displaySection('search', this.model.search);
 		return this;
 	};
 
 	/**
 	 * @function renderQuery
 	 * @description Renders the query area
-	 * @todo Externalize the hiding of the search area
 	 * @returns {object}
 	 */
 	AppView.prototype.renderQuery = function() {
@@ -154,34 +119,52 @@ define(
 		this.model.character.getMatches().forEach(function(match) {
 			characters.push(self.model.findCharacterById(match));
 		});
-		this.children.$searchArea.addClass('u-hidden');
-		this.children.$queryArea
-			.removeClass('u-hidden')
-			.html(this.children.queryTemplate({
+		if (characters.length > 0) {
+			this.layout.displaySection('query', {
 				entry: characters,
 				show: this.model.show.getName()
-			})
-		);
+			});
+		}
+		else {
+			this.layout.displaySection('search', {
+				show: this.model.show.getName(),
+				imdbId: this.model.show.getImdbId()
+			});
+		}
+		return this;
+	};
+
+	/**
+	 * @function renderChoice
+	 * @description Renders the choice area
+	 * @returns {object}
+	 */
+	AppView.prototype.renderChoice = function() {
+		this.layout.displaySection('choice', {
+			person: this.model.findPersonById(this.model.character.getSelected())
+		});
 		return this;
 	};
 
 	/**
 	 * @function renderResults
 	 * @description Renders the results area
-	 * @todo Externalize the hiding of the query area
 	 * @returns {object}
 	 */
 	AppView.prototype.renderResults = function() {
-		var person = this.model.findPersonById(this.model.character.getSelected());
-		this.children.$queryArea.addClass('u-hidden');
-		this.children.$resultsArea
-			.removeClass('u-hidden')
-			.html(this.children.resultsTemplate({
+		var credits = this.model.character.getCredits(),
+			person = this.model.findPersonById(this.model.character.getSelected());
+		if (credits.length > 1) {
+			this.layout.displaySection('results', {
 				person: person.name,
 				show: this.model.show.getId(),
 				entry: this.model.character.getCredits()
-			}));
-		var carousel = new Carousel($('#carousel'));
+			});
+			var carousel = new Carousel($('#carousel'));
+		}
+		else {
+			this.layout.displaySection('choice');
+		}
 		return this;
 	};
 

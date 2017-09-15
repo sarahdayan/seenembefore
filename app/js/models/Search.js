@@ -6,13 +6,13 @@ define(['services/Validator', 'services/Event'], function(Validator, Event) {
 	 * Represents a user search.
 	 * @constructor
 	 */
-	var Search = function() {
+	var Search = function(character, show) {
 		this.character = {
-			value: null,
+			value: typeof character !== 'undefined' ? character : null,
 			validator: ['isString', 'isNotEmpty']
 		};
 		this.show = {
-			value: null,
+			value: typeof show !== 'undefined' ? show : null,
 			validator: ['isString', 'isNotEmpty']
 		};
 

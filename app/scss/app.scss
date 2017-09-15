@@ -4,8 +4,8 @@
    =============== */
 
    @import 'settings/_colors';
-   @import 'settings/_variables';
    @import '../fonts/scss/_icons'; // can't use absolute path with gulp-iconfont-css yet | https://github.com/backflip/gulp-iconfont-css/issues/47
+   @import 'settings/_variables';
 
 /* ===============
    TOOLS
@@ -29,32 +29,32 @@
    =============== */
 
    @import 'elements/_global';
-   @import 'elements/_links';
 
 /* ===============
    OBJECTS
    Class-based selectors which define undecorated design patterns
    =============== */
 
+   @import 'objects/_embeds';
    @import 'objects/_grid';
    @import 'objects/_images';
-   @import 'objects/_embeds';
-   @import 'objects/_media-objects';
    @import 'objects/_lists';
+   @import 'objects/_media-objects';
 
 /* ===============
    COMPONENTS
    Specific UI components
    =============== */
 
+   @import 'components/_app';
    @import 'components/_buttons';
-   @import 'components/_sections';
+   @import 'components/_carousel';
+   @import 'components/_characters';
    @import 'components/_form-control';
    @import 'components/_links';
-   @import 'components/_characters';
-   @import 'components/_carousel';
    @import 'components/_nav';
-   @import 'components/_app';
+   @import 'components/_sections';
+   @import 'components/_titles';
 
 /* ===============
    UTILITIES

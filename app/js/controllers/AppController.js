@@ -31,11 +31,10 @@ define(['services/Validator'], function(Validator) {
 	 * @returns {object}
 	 */
 	AppController.prototype.setupHandlers = function() {
-		this.startNewSearchHandler = this.startNewSearch.bind(this);
 		this.saveSearchHandler = this.saveSearch.bind(this);
 		this.saveCharacterHandler = this.saveCharacter.bind(this);
 		this.saveShowHandler = this.saveShow.bind(this);
-		this.saveCharacterMatchesHandler = this.saveCharacterMatches.bind(this);
+		this.handleSetShowResponseHandler = this.handleSetShowResponse.bind(this);
 		this.savePersonCreditsHandler = this.savePersonCredits.bind(this);
 		return this;
 	};
@@ -46,21 +45,24 @@ define(['services/Validator'], function(Validator) {
 	 * @returns {object}
 	 */
 	AppController.prototype.enable = function() {
-		this.view.inputUserSearchEvent.attach(this.startNewSearchHandler);
 		this.view.inputUserSearchEvent.attach(this.saveSearchHandler);
 		this.view.inputUserCharacterChoiceEvent.attach(this.saveCharacterHandler);
 		this.model.setSearchEvent.attach(this.saveShowHandler);
-		this.model.setShowEvent.attach(this.saveCharacterMatchesHandler);
+		this.model.setShowEvent.attach(this.handleSetShowResponseHandler);
 		this.model.setCharacterEvent.attach(this.savePersonCreditsHandler);
 		return this;
 	};
 
 	/**
-	 * @function startNewSearch
-	 * @description Gets the model ready for a new search
+	 * @function execute
+	 * @description Executes callbacks depending on status responses
+	 * @param {object} status - the status with responses.
+	 * @param {object} callbacks - the callbacks to execute according to the status responses.
 	 */
-	AppController.prototype.startNewSearch = function() {
-		this.model.init();
+	AppController.prototype.execute = function(status, callbacks) {
+		for (var response in status.response) {
+			callbacks[response]();
+		}
 	};
 
 	/**
@@ -86,7 +88,7 @@ define(['services/Validator'], function(Validator) {
 
 	/**
 	 * @function saveCharacterMatches
-	 * @description Gets the search data and saves the show
+	 * @description Find character matches in show cast and saves them
 	 */
 	AppController.prototype.saveCharacterMatches = function() {
 		this.model.setCharacterMatches(this.model.findCharacterMatches());
@@ -110,6 +112,27 @@ define(['services/Validator'], function(Validator) {
 	 */
 	AppController.prototype.savePersonCredits = function() {
 		this.model.setSelectedCredits(this.model.character.getSelected());
+	};
+
+	/*
+	 * @function handleSetShowResponse
+	 * @description Gets the response of setting a show and handles it
+	 */
+	AppController.prototype.handleSetShowResponse = function(sender, args) {
+		var self = this;
+		this.execute(args, {
+			done: function() {
+				self.saveCharacterMatches();
+			},
+			fail: function() {
+				if (args.response.fail === 404) {
+					console.log('show not found');
+				}
+				else {
+					console.log('sorry something happened');
+				}
+			}
+		});
 	};
 
 	return AppController;

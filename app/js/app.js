@@ -16,10 +16,11 @@ require.config({
 });
 
 requirejs(
-	['services/Api', 'models/AppModel', 'views/AppView', 'controllers/AppController'],
+	['services/Api', 'models/AppModel', 'views/AppView',
+	'controllers/AppController'],
 	function(Api, AppModel, AppView, AppController) {
 
-	var model = new AppModel(),
+	var model = new AppModel('Walter White', 'Breaking Bad'),
 		view = new AppView(model),
 		controller = new AppController(model, view);
 });

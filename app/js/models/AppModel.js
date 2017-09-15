@@ -9,7 +9,11 @@ define(
 	 * The model of the app
 	 * @constructor
 	 */
-	var AppModel = function() {
+	var AppModel = function(character, show) {
+		this.search = new Search(character, show);
+		this.show = new Show();
+		this.character = new Character();
+
 		this.api = new Api();
 		this.validator = new Validator();
 
@@ -18,16 +22,6 @@ define(
 		this.setShowEvent = new Event(this);
 		this.setCharacterMatchesEvent = new Event(this);
 		this.setSelectedCreditsEvent = new Event(this);
-	};
-
-	/**
-	 * @function init
-	 * @description Sets initial state
-	 */
-	AppModel.prototype.init = function() {
-		this.search = new Search();
-		this.show = new Show();
-		this.character = new Character();
 	};
 
 	/**
@@ -72,13 +66,22 @@ define(
 	 * @fires AppModel#setShowEvent
 	 */
 	AppModel.prototype.setShow = function(show) {
-		var self = this;
+		var self = this, response = {};
 		this.api.singleSearch(show, ['cast'])
 			.done(function(data) {
 				self.show.setName(data.name);
 				self.show.setId(data.id);
+				self.show.setImdbId(data.externals.imdb);
 				self.show.setCast(data._embedded.cast);
-				self.setShowEvent.notify();
+				response.done = data;
+			})
+			.fail(function(jqxhr, textStatus, error) {
+				response.fail = jqxhr.status;
+			})
+			.always(function() {
+				self.setShowEvent.notify({
+					response: response
+				});
 			});
 	};
 

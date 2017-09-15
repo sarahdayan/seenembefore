@@ -1,3 +1,17 @@
 strong {
 	font-weight: $font-weight-bold;
 }
+
+em {
+	font-style: italic;
+}
+
+a {
+	color: $link-color;
+	outline: none;
+	cursor: pointer;
+	text-decoration: none;
+	&:hover {
+		text-decoration: underline;
+	}
+}

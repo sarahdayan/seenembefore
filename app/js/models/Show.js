@@ -17,6 +17,10 @@ define(
 			value: null,
 			validator: ['isInt', 'isNotEmpty']
 		};
+		this.imdbId = {
+			value: null,
+			validator: ['isString', 'isNotEmpty']
+		};
 		this.cast = {
 			value: {},
 			validator: ['isNotEmpty']
@@ -27,6 +31,7 @@ define(
 		this.setNameEvent = new Event(this);
 		this.setIdEvent = new Event(this);
 		this.setCastEvent = new Event(this);
+		this.setImdbIdEvent = new Event(this);
 	};
 
 	/**
@@ -82,6 +87,26 @@ define(
 	 */
 	Show.prototype.getId = function() {
 		return this.id.value;
+	};
+
+	/**
+	 * @function setImdbId
+	 * @description Sets the IMDB id
+	 * @param {number} imdbId - the imdbId.
+	 * @fires Show#setImdbIdEvent
+	 */
+	Show.prototype.setImdbId = function(imdbId) {
+		this.set(imdbId, this.imdbId);
+		this.setImdbIdEvent.notify();
+	};
+
+	/**
+	 * @function getImdbId
+	 * @description Gets an id
+	 * @returns {number}
+	 */
+	Show.prototype.getImdbId = function() {
+		return this.imdbId.value;
 	};
 
 	/**
