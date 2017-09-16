@@ -4,6 +4,7 @@
 		opacity: .4;
 		transition: all .1s ease-out;
 		&:hover {
+			text-decoration: none;
 			opacity: .6;
 		}
 	}
