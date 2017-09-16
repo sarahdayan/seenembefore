@@ -112,7 +112,7 @@ var options = {
 			callback: browserSync.reload
 		},
 		js: {
-			files: 'app/js/**/*.js',
+			files: ['app/js/**/*.js', '!app/js/templates/templates.js'],
 			callback: ['jshint', 'handlebars', browserSync.reload]
 		},
 		iconfont: {
