@@ -191,9 +191,9 @@ gulp.task('jshint', function() {
 //   Task: Handlebars
 // -------------------------------------
 
-gulp.task('handlebars', function() {
-	return plugins.shell(options.handlebars.commands.precompile);
-});
+gulp.task('handlebars', plugins.shell.task([
+	options.handlebars.commands.precompile
+]));
 
 // -------------------------------------
 //   Task: Watch
