@@ -1,11 +1,11 @@
 .c-nav {
 	&__link {
 		text-decoration: none;
-		opacity: .4;
+		opacity: .6;
 		transition: all .1s ease-out;
 		&:hover {
 			text-decoration: none;
-			opacity: .6;
+			opacity: .8;
 		}
 	}
 }
