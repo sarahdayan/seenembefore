@@ -91,9 +91,11 @@ define(
 		Typekit.load({
 			async: true,
 			active: function() {
-				autosizeInput(self.children.$characterInput.get(0));
-				autosizeInput(self.children.$showInput.get(0));
-				self.children.$characterInput.focus();
+				setTimeout(function() {
+					autosizeInput(self.children.$characterInput.get(0));
+					autosizeInput(self.children.$showInput.get(0));
+					self.children.$characterInput.focus();
+				}, 500);
 			}
 		});
 		return this;
