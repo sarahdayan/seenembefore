@@ -12,6 +12,11 @@ input, button, input[type="submit"] {
 	color: inherit;
 }
 
+button {
+	text-transform: inherit;
+	letter-spacing: inherit;
+}
+
 input {
 	padding: 0;
 	border: none;

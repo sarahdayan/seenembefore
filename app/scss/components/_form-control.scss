@@ -1,5 +1,6 @@
 .c-form-control {
 	color: inherit;
+	outline: none;
 	@include placeholder(inherit);
 	&--naked {
 		background: none;
