@@ -69,7 +69,7 @@ var options = {
 
 	handlebars: {
 		commands: {
-			precompile: 'handlebars app/js/templates/*.handlebars.html -f app/js/templates/templates.js -m'
+			precompile: 'handlebars app/js/templates/*.handlebars.html -f app/js/templates/templates.js -m -a'
 		}
 	},
 
@@ -113,7 +113,11 @@ var options = {
 		},
 		js: {
 			files: ['app/js/**/*.js', '!app/js/templates/templates.js'],
-			callback: ['jshint', 'handlebars', browserSync.reload]
+			callback: ['jshint', browserSync.reload]
+		},
+		templates: {
+			files: ['app/js/templates/**/*.handlebars.html', '!app/js/templates/templates.js'],
+			callback: ['handlebars', browserSync.reload]
 		},
 		iconfont: {
 			files: 'app/svg/**/*.svg',
@@ -203,6 +207,7 @@ gulp.task('watch', ['browserSync', 'sass'], function() {
 	gulp.watch(options.watch.sass.files, options.watch.sass.callback);
 	gulp.watch(options.watch.html.files, options.watch.html.callback);
 	gulp.watch(options.watch.js.files, options.watch.js.callback);
+	gulp.watch(options.watch.templates.files, options.watch.templates.callback);
 	gulp.watch(options.watch.iconfont.files, options.watch.iconfont.callback);
 })
 

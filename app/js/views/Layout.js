@@ -1,6 +1,6 @@
 define(
-	['jquery', 'handlebars', 'helpers/HandlebarsHelpers'],
-	function($, Handlebars, HandlebarsHelpers) {
+	['jquery', 'handlebars.runtime', 'helpers/HandlebarsHelpers', 'templates/templates'],
+	function($, Handlebars, HandlebarsHelpers, Templates) {
 
 	'use strict';
 
@@ -73,7 +73,7 @@ define(
 	 */
 	Layout.prototype.injectInSection = function(section, args) {
 		args = args || {};
-		this.templates[section].div.html(Handlebars.templates[section](args));
+		this.templates[section].div.html(Handlebars.templates[section + '.handlebars.html'](args));
 		return this;
 	};
 
