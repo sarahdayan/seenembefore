@@ -1,66 +1,65 @@
 /* ===============
-   SETTINGS
-   Used with preprocessors and contain font, colors definitions, etc.
-   =============== */
+	SETTINGS
+	Used with preprocessors and contain font, colors definitions, etc.
+	=============== */
 
-   @import 'settings/_colors';
-   @import '../fonts/scss/_icons'; // can't use absolute path with gulp-iconfont-css yet | https://github.com/backflip/gulp-iconfont-css/issues/47
-   @import 'settings/_variables';
-
-/* ===============
-   TOOLS
-   Globally used mixins and functions
-   =============== */
-
-   @import 'tools/_functions';
-   @import 'tools/_mixins';
+	@import 'settings/_colors';
+	@import '../fonts/scss/_icons'; // can't use absolute path with gulp-iconfont-css yet | https://github.com/backflip/gulp-iconfont-css/issues/47
+	@import 'settings/_variables';
 
 /* ===============
-   GENERIC
-   Reset and/or normalize styles, box-sizing definition, etc.
-   =============== */
+	TOOLS
+	Globally used mixins and functions
+	=============== */
 
-   @import '../../node_modules/reset-css/_reset';
-   @import 'generic/_normalize';
-
-/* ===============
-   ELEMENTS
-   Styling for bare HTML elements
-   =============== */
-
-   @import 'elements/_global';
+	@import 'tools/_functions';
+	@import 'tools/_mixins';
 
 /* ===============
-   OBJECTS
-   Class-based selectors which define undecorated design patterns
-   =============== */
+	GENERIC
+	Reset and/or normalize styles, box-sizing definition, etc.
+	=============== */
 
-   @import 'objects/_embeds';
-   @import 'objects/_grid';
-   @import 'objects/_images';
-   @import 'objects/_lists';
-   @import 'objects/_media-objects';
+	@import '../../node_modules/reset-css/_reset';
+	@import 'generic/_normalize';
 
 /* ===============
-   COMPONENTS
-   Specific UI components
-   =============== */
+	ELEMENTS
+	Styling for bare HTML elements
+	=============== */
 
-   @import 'components/_app';
-   @import 'components/_buttons';
-   @import 'components/_carousel';
-   @import 'components/_characters';
-   @import 'components/_form-control';
-   @import 'components/_links';
-   @import 'components/_nav';
-   @import 'components/_sections';
-   @import 'components/_titles';
+	@import 'elements/_global';
 
 /* ===============
-   UTILITIES
-   Utilities and helper classes with ability to override anything which goes before in the triangle, eg. hide helper class
-   =============== */
+	OBJECTS
+	Class-based selectors which define undecorated design patterns
+	=============== */
 
-   @import 'utilities/_helpers';
+	@import 'objects/_embeds';
+	@import 'objects/_grid';
+	@import 'objects/_images';
+	@import 'objects/_lists';
+	@import 'objects/_media-objects';
 
-//@import 'utilities/_healthcheck';
+/* ===============
+	COMPONENTS
+	Specific UI components
+	=============== */
+
+	@import 'components/_app';
+	@import 'components/_buttons';
+	@import 'components/_carousel';
+	@import 'components/_characters';
+	@import 'components/_form-control';
+	@import 'components/_links';
+	@import 'components/_nav';
+	@import 'components/_sections';
+	@import 'components/_titles';
+
+/* ===============
+	UTILITIES
+	Utilities and helper classes with ability to override anything which goes before in the triangle, eg. hide helper class
+	=============== */
+
+	@import 'utilities/_helpers';
+	//@import 'utilities/_healthcheck';
