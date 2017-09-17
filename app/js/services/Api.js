@@ -3,7 +3,7 @@ define(['jquery'], function($) {
 	'use strict';
 
 	var Api = function() {
-		this.baseUrl = 'http://api.tvmaze.com/';
+		this.baseUrl = 'https://api.tvmaze.com/';
 		this.endpoints = {
 			singleSearch: {
 				endpoint: this.baseUrl + 'singlesearch/shows',
@@ -12,11 +12,7 @@ define(['jquery'], function($) {
 						q: '{query}'
 					},
 					embed: ['cast']
-				}/*,
-				qrstrng: {
-					q: '{query}',
-					embed: ['episodes', 'toto']
-				}*/
+				}
 			},
 			castCredits: {
 				endpoint: this.baseUrl + 'people/{query}/castcredits',
@@ -26,24 +22,6 @@ define(['jquery'], function($) {
 			}
 		};
 	};
-
-	/*Api.prototype.getParameters = function(endpoint, embed) {
-		var self = this,
-			parameters = {
-				embed: []
-			};
-		for (var query in this.endpoints[endpoint].qrstrng) {
-			if (query === 'embed' && embed) {
-				query.forEach(function(property) {
-					if ($.inArray(property, self.endpoints[endpoint].qrstrng.embed) !== -1) parameters.embed.push(property);
-				});
-			}
-			else {
-				parameters[query] = this.endpoints[endpoint].qrstrng[query];
-			}
-		}
-		return decodeURIComponent($.param(parameters));
-	};*/
 
 	Api.prototype.getParams = function(endpoint, embed) {
 		var self = this,
