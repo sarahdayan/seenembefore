@@ -31,7 +31,7 @@ var options = {
 	// ----- Default ----- //
 
 	default: {
-		tasks: ['sass', 'handlebars', 'browserSync', 'watch']
+		tasks: ['iconfont', 'sass', 'handlebars', 'browserSync', 'watch']
 	},
 
 	// ----- Browser Sync ----- //
@@ -166,7 +166,7 @@ gulp.task('sass', function() {
 //   Task: Icon Font
 // -------------------------------------
 
-gulp.task('iconfont', ['sass'], function() {
+gulp.task('iconfont', function() {
 	return gulp.src(options.icons.files)
 		.pipe(plugins.iconfontCss({
 			path: options.icons.path,
@@ -205,7 +205,7 @@ gulp.task('handlebars', plugins.shell.task([
 //   Task: Watch
 // -------------------------------------
 
-gulp.task('watch', ['browserSync', 'sass'], function() {
+gulp.task('watch', function() {
 	gulp.watch(options.watch.sass.files, options.watch.sass.callback);
 	gulp.watch(options.watch.html.files, options.watch.html.callback);
 	gulp.watch(options.watch.js.files, options.watch.js.callback);
@@ -261,7 +261,8 @@ gulp.task('clean', function() {
 // -------------------------------------
 
 gulp.task('default', function(callback) {
-	runSequence(options.default.tasks, callback);
+	options.default.tasks.push(callback);
+	runSequence.apply(this, options.default.tasks);
 });
 
 // -------------------------------------
