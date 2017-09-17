@@ -1,7 +1,7 @@
 define(
 	['services/Validator', 'services/Event', 'services/Api', 'models/Search',
-	'models/Show', 'models/Character', 'jquery'],
-	function(Validator, Event, Api, Search, Show, Character, $) {
+	'models/Show', 'models/Character', 'jquery', 'services/Helper'],
+	function(Validator, Event, Api, Search, Show, Character, $, Helper) {
 
 	'use strict';
 
@@ -16,6 +16,7 @@ define(
 
 		this.api = new Api();
 		this.validator = new Validator();
+		this.helper = new Helper();
 
 		this.setSearchEvent = new Event(this);
 		this.setCharacterEvent = new Event(this);
@@ -149,7 +150,7 @@ define(
 	AppModel.prototype.findPersonCredits = function(resource) {
 		var show = resource._embedded.show,
 			deferred = new $.Deferred();
-		$.getJSON(resource._links.character.href)
+		$.getJSON(this.helper.toHttps(resource._links.character.href))
 			.done(function(data) {
 				deferred.resolve({
 					id: data.name,
