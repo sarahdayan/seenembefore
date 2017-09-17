@@ -87,13 +87,7 @@ var options = {
 
 	requirejs: {
 		baseUrl: 'app/js',
-		paths: {
-			'jquery': '../../node_modules/jquery/dist/jquery.min',
-			'requirejs': '../../node_modules/requirejs/require',
-			'handlebars.runtime': '../../node_modules/handlebars/dist/handlebars.runtime',
-			'autosize-input': '../../node_modules/autosize-input/autosize-input.min',
-			'typekit': 'https://use.typekit.net/ewf6qzj'
-		},
+		mainConfigFile: 'app/js/app.js',
 		preserveLicenseComments: false,
 		name: 'app',
 		out: 'dist/js/app.min.js',
