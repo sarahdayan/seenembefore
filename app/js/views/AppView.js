@@ -45,6 +45,7 @@ define(
 		this.children.$submitButton = $('.js-form__submit');
 
 		this.children.personButtonSelector = '.js-person';
+		this.children.newSearchSelector = '.js-newSearch';
 
 		return this;
 	};
@@ -57,6 +58,7 @@ define(
 	AppView.prototype.setupHandlers = function() {
 		this.submitButtonHandler = this.inputUserSearch.bind(this);
 		this.personButtonHandler = this.inputUserCharacterChoice.bind(this);
+		this.newSearchHandler = this.renderForm.bind(this);
 		this.setSearchEventHandler = this.renderSearch.bind(this);
 		this.setCharacterMatchesEventHandler = this.renderQuery.bind(this);
 		this.setCharacterEventHandler = this.renderChoice.bind(this);
@@ -72,6 +74,7 @@ define(
 	AppView.prototype.enable = function() {
 		this.children.$submitButton.click(this.submitButtonHandler);
 		this.children.$document.on('click', this.children.personButtonSelector, this.personButtonHandler);
+		this.children.$document.on('click', this.children.newSearchSelector, this.newSearchHandler);
 		this.model.setSearchEvent.attach(this.setSearchEventHandler);
 		this.model.setCharacterMatchesEvent.attach(this.setCharacterMatchesEventHandler);
 		this.model.setCharacterEvent.attach(this.setCharacterEventHandler);
@@ -94,7 +97,7 @@ define(
 				setTimeout(function() {
 					autosizeInput(self.children.$characterInput.get(0));
 					autosizeInput(self.children.$showInput.get(0));
-					self.layout.showSection('form');
+					self.renderForm();
 					self.children.$characterInput.focus();
 				}, 500);
 			}
@@ -109,6 +112,16 @@ define(
 	 */
 	AppView.prototype.renderSearch = function() {
 		this.layout.displaySection('search', this.model.search);
+		return this;
+	};
+
+	/**
+	 * @function renderForm
+	 * @description Renders the form area
+	 * @returns {object}
+	 */
+	AppView.prototype.renderForm = function() {
+		this.layout.showSection('form');
 		return this;
 	};
 
