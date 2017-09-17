@@ -126,9 +126,11 @@ define(['services/Validator'], function(Validator) {
 			},
 			fail: function() {
 				if (args.response.fail === 404) {
+					// @todo handle
 					console.log('show not found');
 				}
 				else {
+					// @todo handle
 					console.log('sorry something happened');
 				}
 			}
