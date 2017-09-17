@@ -1,6 +1,6 @@
 define(
-	['services/Validator', 'services/Event'],
-	function(Validator, Event) {
+	['services/Event', 'services/Validator'],
+	function(Event, Validator) {
 
 	'use strict';
 

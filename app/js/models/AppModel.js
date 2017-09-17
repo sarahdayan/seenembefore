@@ -1,7 +1,7 @@
 define(
-	['services/Validator', 'services/Event', 'services/Api', 'models/Search',
-	'models/Show', 'models/Character', 'jquery', 'services/Helper'],
-	function(Validator, Event, Api, Search, Show, Character, $, Helper) {
+	['jquery', 'services/Api', 'models/Character', 'services/Event',
+	'services/Helper', 'models/Search', 'models/Show', 'services/Validator'],
+	function($, Api, Character, Event, Helper, Search, Show, Validator) {
 
 	'use strict';
 

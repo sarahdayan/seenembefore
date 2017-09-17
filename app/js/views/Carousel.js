@@ -1,6 +1,6 @@
 define(
-	['services/Validator', 'services/Event', 'jquery'],
-	function(Validator, Event, $) {
+	['jquery', 'services/Event', 'services/Validator'],
+	function($, Event, Validator) {
 
 	'use strict';
 

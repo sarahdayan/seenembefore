@@ -1,8 +1,7 @@
 define(
-	['services/Event', 'jquery', 'autosize-input', 'typekit',
-	'views/Carousel', 'views/Layout'],
-	function(
-		Event, $, AutosizeInput, Typekit, Carousel, Layout) {
+	['jquery', 'autosize-input', 'views/Carousel',
+	'services/Event', 'views/Layout', 'typekit'],
+	function($, AutosizeInput, Carousel, Event, Layout, Typekit) {
 
 	'use strict';
 
