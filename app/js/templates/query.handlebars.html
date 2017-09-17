@@ -4,7 +4,7 @@
 		{{#each entry}}
 		<li class="u-margin-left-24 u-margin-right-24 u-margin-top-24 u-margin-bottom-24">
 			<div class="o-media-object o-media-object--column c-character">
-				<div class="o-img o-img--circle c-character__avatar u-margin-bottom-16" style="background-image: url({{this.character.image.original}})"></div>
+				<div class="o-img o-img--circle c-character__avatar u-margin-bottom-16" style="background-image: url({{#https}}{{this.character.image.original}}{{/https}})"></div>
 				<div>
 					<h3 class="c-character__title">{{this.character.name}}</h3>
 					<h4 class="c-character__subtitle u-margin-bottom-16">{{this.person.name}}</h4>

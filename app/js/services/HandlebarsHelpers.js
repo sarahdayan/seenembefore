@@ -44,6 +44,15 @@ define(function() {
 					return options.fn(this);
 				}
 				return options.inverse(this);
+			},
+			/**
+			 * @function https
+			 * @description Turns an http url into https
+			 * @param {object} options - an object of options.
+			 * @returns {string}
+			 */
+			https: function(options) {
+				return options.fn(this).replace('http://', 'https://');
 			}
 		};
 	})();

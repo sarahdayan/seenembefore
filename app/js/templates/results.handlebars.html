@@ -11,7 +11,7 @@
 				<div class="c-carousel__slide js-carouselSlide">
 					<div class="o-media-object o-media-object--center o-media-object--column@tablet o-media-object--column@mobile c-character c-character--big">
 						{{#if this.image}}
-						<div class="o-img o-img--circle c-character__avatar u-margin-right-24@desktop u-margin-bottom-24@tablet u-margin-bottom-24@mobile" style="background-image: url({{this.image}})"></div>
+						<div class="o-img o-img--circle c-character__avatar u-margin-right-24@desktop u-margin-bottom-24@tablet u-margin-bottom-24@mobile" style="background-image: url({{#https}}{{this.image}}{{/https}})"></div>
 						{{else}}
 						<img class="o-img o-img--circle c-character__avatar u-margin-right-24@desktop u-margin-bottom-24@tablet u-margin-bottom-24@mobile" src="images/avatar-placeholder.svg" alt="{{this.name}} in {{this.show.name}}">
 						{{/if}}
