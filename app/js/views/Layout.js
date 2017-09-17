@@ -1,6 +1,6 @@
 define(
 	['jquery', 'handlebars.runtime',
-	'helpers/HandlebarsHelpers', 'templates/templates'],
+	'services/HandlebarsHelpers', 'templates/templates'],
 	function($, Handlebars, HandlebarsHelpers, Templates) {
 
 	'use strict';
