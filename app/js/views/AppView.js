@@ -94,6 +94,7 @@ define(
 				setTimeout(function() {
 					autosizeInput(self.children.$characterInput.get(0));
 					autosizeInput(self.children.$showInput.get(0));
+					self.layout.showSection('form');
 					self.children.$characterInput.focus();
 				}, 500);
 			}

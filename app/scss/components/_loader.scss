@@ -1,0 +1,7 @@
+.c-loader {
+	@include loader02(
+		$color: palette(purple, light),
+		$size: $font-size-xl,
+		$border-size: $spacing-unit / 2
+	);
+}

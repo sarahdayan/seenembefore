@@ -11,6 +11,12 @@ define(
 	var Layout = function() {
 		this.sections = $('.c-section');
 		this.templates = {
+			load: {
+				div: $('.js-section__load')
+			},
+			form: {
+				div: $('.js-section__form')
+			},
 			search: {
 				div: $('.js-section__search'),
 				template: $('#search')

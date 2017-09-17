@@ -35,6 +35,7 @@
     "handlebars": "^4.0.10",
     "jquery": "^3.2.1",
     "requirejs": "^2.3.4",
-    "reset-css": "^2.2.1"
+    "reset-css": "^2.2.1",
+    "spinthatshit": "^1.0.4"
   }
 }
