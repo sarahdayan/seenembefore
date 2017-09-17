@@ -8,10 +8,14 @@
 //   `gulp`
 //   `gulp watch`
 //   `gulp sass`
+//   `gulp iconfont`
 //   `gulp jshint`
 //   `gulp handlebars`
 //   `gulp browserSync`
 //   `gulp useref`
+//   `gulp requirejs`
+//   `gulp images`
+//   `gulp fonts`
 //   `gulp clean`
 //   `gulp build`
 //
@@ -84,8 +88,11 @@ var options = {
 	requirejs: {
 		baseUrl: 'app/js',
 		paths: {
-			jquery: '../../node_modules/jquery/dist/jquery.min',
-			requirejs: '../../node_modules/requirejs/require'
+			'jquery': '../../node_modules/jquery/dist/jquery.min',
+			'requirejs': '../../node_modules/requirejs/require',
+			'handlebars.runtime': '../../node_modules/handlebars/dist/handlebars.runtime',
+			'autosize-input': '../../node_modules/autosize-input/autosize-input.min',
+			'typekit': 'https://use.typekit.net/ewf6qzj'
 		},
 		preserveLicenseComments: false,
 		name: 'app',
@@ -98,6 +105,13 @@ var options = {
 	images: {
 		files: 'app/images/**/*.+(png|jpg|jpeg|gif|svg)',
 		destination: 'dist/images'
+	},
+
+	// ----- Fonts ----- //
+
+	fonts: {
+		files: 'app/fonts/**/*.+(eot|ttf|woff)',
+		destination: 'dist/fonts'
 	},
 
 	// ----- Watch ----- //
@@ -128,13 +142,13 @@ var options = {
 	// ----- Clean ----- //
 
 	clean: {
-		src: ['dist/**/*', '!dist/images', '!dist/images/**/*']
+		src: ['dist/**/*']
 	},
 
 	// ----- Build ----- //
 
 	build: {
-		tasks: ['clean', 'useref', 'images', 'handlebars', 'requirejs']
+		tasks: ['useref', 'images', 'fonts', 'handlebars', 'requirejs']
 	}
 };
 
@@ -246,6 +260,15 @@ gulp.task('images', function() {
 	return gulp.src(options.images.files)
 		.pipe(plugins.cache(plugins.imagemin({interlaced: true})))
 		.pipe(gulp.dest(options.images.destination));
+});
+
+// -------------------------------------
+//   Task: Fonts
+// -------------------------------------
+
+gulp.task('fonts', function() {
+	return gulp.src(options.fonts.files)
+		.pipe(gulp.dest(options.fonts.destination));
 });
 
 // -------------------------------------
