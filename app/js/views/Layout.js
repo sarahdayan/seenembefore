@@ -60,8 +60,8 @@ define(
 	 */
 	Layout.prototype.showSection = function(section) {
 		var hiddenClassName = 'u-hidden';
-		this.sections.addClass(this.hiddenClassName);
-		this.templates[section].div.removeClass(this.hiddenClassName);
+		this.sections.addClass(hiddenClassName);
+		this.templates[section].div.removeClass(hiddenClassName);
 		return this;
 	};
 
