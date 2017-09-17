@@ -175,7 +175,9 @@ gulp.task('iconfont', ['sass'], function() {
 			fontPath: options.icons.fontPath
 		}))
 		.pipe(plugins.iconfont({
-			fontName: options.icons.fontName
+			fontName: options.icons.fontName,
+			normalize: true,
+			fontHeight: 1001
 		}))
 		.pipe(gulp.dest(options.icons.destination));
 });

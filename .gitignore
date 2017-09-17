@@ -1,5 +1,6 @@
 /node_modules
 /app/css/app.css
+/app/fonts/scss/_icons.scss
 /app/fonts/icons.*
 /app/js/mocks
 /app/js/templates/templates.js
