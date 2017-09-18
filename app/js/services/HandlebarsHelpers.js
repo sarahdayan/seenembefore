@@ -27,15 +27,15 @@ define(['services/Helper'], function(Helper) {
 				}
 
 				var operators = {
-					'==': function (left, right) { return left == right; },
-					'===': function (left, right) { return left === right; },
-					'!=': function (left, right) { return left != right; },
-					'!==': function (left, right) { return left !== right; },
-					'<': function (left, right) { return left < right; },
-					'>': function (left, right) { return left > right; },
-					'<=': function (left, right) { return left <= right; },
-					'>=': function (left, right) { return left >= right; },
-					'typeof': function (left, right) { return typeof left == right; }
+					'==': function(left, right) { return left == right; },
+					'===': function(left, right) { return left === right; },
+					'!=': function(left, right) { return left != right; },
+					'!==': function(left, right) { return left !== right; },
+					'<': function(left, right) { return left < right; },
+					'>': function(left, right) { return left > right; },
+					'<=': function(left, right) { return left <= right; },
+					'>=': function(left, right) { return left >= right; },
+					'typeof': function(left, right) { return typeof left == right; }
 				};
 
 				if (!operators[operator]) throw new Error('Handlerbars Helper \'compare\' doesn\'t know the operator ' + operator);
