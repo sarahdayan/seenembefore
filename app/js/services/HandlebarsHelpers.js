@@ -1,4 +1,4 @@
-define(function() {
+define(['services/Helper'], function(Helper) {
 
 	'use strict';
 
@@ -52,7 +52,8 @@ define(function() {
 			 * @returns {string}
 			 */
 			https: function(options) {
-				return options.fn(this).replace('http://', 'https://');
+				var helper = new Helper();
+				return helper.toHttps(options.fn(this));
 			}
 		};
 	})();
