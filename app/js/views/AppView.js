@@ -88,16 +88,11 @@ define(
 	 */
 	AppView.prototype.initLayout = function() {
 		var self = this;
-		$(this.children.characterInputSelector).attr('placeholder', this.model.search.getCharacter());
-		$(this.children.showInputSelector).attr('placeholder', this.model.search.getShow());
 		Typekit.load({
 			async: true,
 			active: function() {
 				setTimeout(function() {
-					autosizeInput($(self.children.characterInputSelector).get(0));
-					autosizeInput($(self.children.showInputSelector).get(0));
 					self.renderForm();
-					$(self.children.characterInputSelector).focus();
 				}, 500);
 			}
 		});
@@ -120,7 +115,14 @@ define(
 	 * @returns {object}
 	 */
 	AppView.prototype.renderForm = function() {
+		this.layout.injectInSection('form', {
+			character: this.model.search.getCharacter(),
+			show: this.model.search.getShow()
+		});
+		autosizeInput($(this.children.characterInputSelector).get(0));
+		autosizeInput($(this.children.showInputSelector).get(0));
 		this.layout.showSection('form');
+		$(this.children.characterInputSelector).focus();
 		return this;
 	};
 
