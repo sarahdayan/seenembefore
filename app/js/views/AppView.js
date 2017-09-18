@@ -39,10 +39,10 @@ define(
 	 */
 	AppView.prototype.createChildren = function() {
 		this.children.$document = $(document);
-		this.children.$characterInput = $('.js-form__character');
-		this.children.$showInput = $('.js-form__show');
-		this.children.$submitButton = $('.js-form__submit');
 
+		this.children.characterInputSelector = '.js-form__character';
+		this.children.showInputSelector = '.js-form__show';
+		this.children.submitButtonSelector = '.js-form__submit';
 		this.children.personButtonSelector = '.js-person';
 		this.children.newSearchSelector = '.js-newSearch';
 
@@ -71,7 +71,7 @@ define(
 	 * @returns {object}
 	 */
 	AppView.prototype.enable = function() {
-		this.children.$submitButton.click(this.submitButtonHandler);
+		this.children.$document.on('click', this.children.submitButtonSelector, this.submitButtonHandler);
 		this.children.$document.on('click', this.children.personButtonSelector, this.personButtonHandler);
 		this.children.$document.on('click', this.children.newSearchSelector, this.newSearchHandler);
 		this.model.setSearchEvent.attach(this.setSearchEventHandler);
@@ -88,16 +88,16 @@ define(
 	 */
 	AppView.prototype.initLayout = function() {
 		var self = this;
-		this.children.$characterInput.attr('placeholder', this.model.search.getCharacter());
-		this.children.$showInput.attr('placeholder', this.model.search.getShow());
+		$(this.children.characterInputSelector).attr('placeholder', this.model.search.getCharacter());
+		$(this.children.showInputSelector).attr('placeholder', this.model.search.getShow());
 		Typekit.load({
 			async: true,
 			active: function() {
 				setTimeout(function() {
-					autosizeInput(self.children.$characterInput.get(0));
-					autosizeInput(self.children.$showInput.get(0));
+					autosizeInput($(self.children.characterInputSelector).get(0));
+					autosizeInput($(self.children.showInputSelector).get(0));
 					self.renderForm();
-					self.children.$characterInput.focus();
+					$(self.children.characterInputSelector).focus();
 				}, 500);
 			}
 		});
@@ -192,8 +192,8 @@ define(
 	AppView.prototype.inputUserSearch = function(event) {
 		event.preventDefault();
 		this.inputUserSearchEvent.notify({
-			character: this.children.$characterInput.val(),
-			show: this.children.$showInput.val()
+			character: $(this.children.characterInputSelector).val(),
+			show: $(this.children.showInputSelector).val()
 		});
 	};
 
