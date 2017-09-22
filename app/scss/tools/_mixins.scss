@@ -36,6 +36,9 @@
 
 @mixin spacing($value, $breakpoint) {
 	.u-margin {
+		&-#{strip-unit($value) * 10}#{$breakpoint} {
+			margin: $value;
+		}
 		&-top-#{strip-unit($value) * 10}#{$breakpoint} {
 			margin-top: $value;
 		}
@@ -50,6 +53,9 @@
 		}
 	}
 	.u-padding {
+		&-#{strip-unit($value) * 10}#{$breakpoint} {
+			padding: $value;
+		}
 		&-top-#{strip-unit($value) * 10}#{$breakpoint} {
 			padding-top: $value;
 		}
@@ -92,4 +98,24 @@
 	background: nth(nth($color-stops, 1), 1);
 	background: -webkit-linear-gradient(legacy-direction($direction), $color-stops);
 	background: linear-gradient($direction, $color-stops);
+}
+
+@mixin text-small {
+	font-size: $font-size-s;
+	line-height: $line-height-s;
+}
+
+@mixin text-large {
+	font-size: $font-size-l;
+	line-height: $line-height-l;
+}
+
+@mixin text-x-large {
+	font-size: $font-size-xl;
+	line-height: $line-height-xl;
+}
+
+@mixin text-xx-large {
+	font-size: $font-size-xxl;
+	line-height: $line-height-xxl;
 }

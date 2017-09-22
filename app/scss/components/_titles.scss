@@ -1,3 +1,12 @@
 .c-title {
-	@extend .u-text-large;
+	@include text-large;
+	@mixin tablet-and-mobile {
+		font-size: unset;
+	}
+	@include tablet {
+		@include tablet-and-mobile;
+	}
+	@include mobile {
+		@include tablet-and-mobile;
+	}
 }

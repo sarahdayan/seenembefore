@@ -2,19 +2,20 @@
 	display: flex;
 	align-items: center;
 	&__arrow {
-		width: $spacing-unit * 10;
+		width: $spacing-unit * 6;
 		text-align: center;
 		color: palette(purple, light);
 		cursor: pointer;
 		opacity: .2;
 		transition: all .2s ease-out;
-		@extend .u-text-xx-large;
+		font-size: $font-size-xxl;
+		line-height: $line-height-xxl;
 		&:hover {
 			opacity: .4;
 		}
 	}
 	&__content {
-		width: calc(100% - #{$spacing-unit * 20});
+		width: calc(100% - #{$spacing-unit * 12});
 	}
 	&__outer {
 		overflow: hidden;

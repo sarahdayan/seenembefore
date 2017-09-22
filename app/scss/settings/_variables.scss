@@ -1,6 +1,6 @@
 $spacing-unit:        .8rem;
 
-$spaces: $spacing-unit $spacing-unit * 2 $spacing-unit * 3 $spacing-unit * 4 $spacing-unit * 5 $spacing-unit * 6;
+$spaces: $spacing-unit $spacing-unit * 2 $spacing-unit * 3 $spacing-unit * 4 $spacing-unit * 5 $spacing-unit * 6 $spacing-unit * 7 $spacing-unit * 8 $spacing-unit * 9;
 
 /* Font */
 
@@ -17,6 +17,7 @@ $line-height-s:    $spacing-unit * 3;
 $line-height-l:    $spacing-unit * 5;
 $line-height-xl:   $spacing-unit * 6;
 $line-height-xxl:  $spacing-unit * 7;
+$letter-spacing:   $spacing-unit / 4;
 
 
 /* Contextual colors */

@@ -119,9 +119,9 @@ define(
 			character: this.model.search.getCharacter(),
 			show: this.model.search.getShow()
 		});
-		autosizeInput($(this.children.characterInputSelector).get(0));
-		autosizeInput($(this.children.showInputSelector).get(0));
-		this.layout.showSection('form');
+		this.layout
+			.autoSizeInputs()
+			.showSection('form');
 		$(this.children.characterInputSelector).focus();
 		return this;
 	};

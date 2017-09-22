@@ -38,6 +38,7 @@
 	width: 100%;
 	max-width: $grid-width;
 	margin: 0 auto;
+	padding: 0 #{$grid-col-gutter};
 	overflow-x: hidden;
 	&__row {
 		display: flex;

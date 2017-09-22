@@ -95,38 +95,30 @@
 		font-weight: $font-weight-bold;
 	}
 	&-letterspaced {
-		letter-spacing: $spacing-unit / 4;
+		letter-spacing: $letter-spacing;
 	}
 	&-small {
-		font-size: $font-size-s;
-		line-height: $line-height-s;
+		@include text-small;
 		@include responsive-versions {
-			font-size: $font-size-s;
-			line-height: $line-height-s;
+			@include text-small;
 		}
 	}
 	&-large {
-		font-size: $font-size-l;
-		line-height: $line-height-l;
+		@include text-large;
 		@include responsive-versions {
-			font-size: $font-size-l;
-			line-height: $line-height-l;
+			@include text-large;
 		}
 	}
 	&-x-large {
-		font-size: $font-size-xl;
-		line-height: $line-height-xl;
+		@include text-x-large;
 		@include responsive-versions {
-			font-size: $font-size-xl;
-			line-height: $line-height-xl;
+			@include text-x-large;
 		}
 	}
 	&-xx-large {
-		font-size: $font-size-xxl;
-		line-height: $line-height-xxl;
+		@include text-xx-large;
 		@include responsive-versions {
-			font-size: $font-size-xxl;
-			line-height: $line-height-xxl;
+			@include text-xx-large;
 		}
 	}
 }

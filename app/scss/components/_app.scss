@@ -6,17 +6,19 @@
 	color: $font-color;
 	&__nav {
 		position: absolute;
-		bottom: $spacing-unit * 4;
-		right: $spacing-unit * 5;
-		@include tablet {
-			left: auto;
-			right: auto;
+		@include desktop {
+			bottom: $spacing-unit * 4;
+			right: $spacing-unit * 5;
+		}
+		@mixin tablet-and-mobile {
+			top: $spacing-unit * 4;
 			width: 100%;
 		}
+		@include tablet {
+			@include tablet-and-mobile;
+		}
 		@include mobile {
-			left: auto;
-			right: auto;
-			width: 100%;
+			@include tablet-and-mobile;
 		}
 	}
 }

@@ -15,21 +15,27 @@
 	}
 	&__subtitle {
 		color: palette(purple);
-		@extend .u-text-uppercase;
-		@extend .u-text-letterspaced;
-		@extend .u-text-small;
+		@include text-small;
+		text-transform: uppercase;
+		letter-spacing: $letter-spacing;
 		&--secondary {
 			color: palette(purple, light);
-			@extend .u-text-strong;
+			font-weight: $font-weight-bold;
 		}
 	}
 	&--big {
-		#{$block}__avatar {
-			width: $spacing-unit * 15;
-			height: $spacing-unit * 15;
+		@mixin c-character--big {
+			#{$block}__avatar {
+				width: $spacing-unit * 15;
+				height: $spacing-unit * 15;
+			}
+			#{$block}__title {
+				@include text-large;
+			}
 		}
-		#{$block}__title {
-			@extend .u-text-large;
+		@include c-character--big;
+		@include responsive-versions {
+			@include c-character--big;
 		}
 	}
 }

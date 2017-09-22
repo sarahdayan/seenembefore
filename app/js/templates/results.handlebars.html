@@ -1,34 +1,36 @@
 {{#if entry}}
-<div id="carousel" class="c-carousel c-carousel--full">
-	<div class="c-carousel__arrow c-carousel__arrow--prev js-carouselPreviousButton">
-		<i class="icon-arrow-left"></i>
-	</div>
-	<div class="c-carousel__content">
-		<div class="c-carousel__outer">
-			<div class="c-carousel__inner u-padding-top-40 u-padding-bottom-40 js-carouselSlider">
-				{{#each entry}}
-				{{#compare this.show.id '!==' ../show}}
-				<div class="c-carousel__slide js-carouselSlide">
-					<div class="o-media-object o-media-object--center o-media-object--column@tablet o-media-object--column@mobile c-character c-character--big">
-						{{#if this.image}}
-						<div class="o-img o-img--circle c-character__avatar u-margin-right-24@desktop u-margin-bottom-24@tablet u-margin-bottom-24@mobile" style="background-image: url({{#https}}{{this.image}}{{/https}})"></div>
-						{{else}}
-						<img class="o-img o-img--circle c-character__avatar u-margin-right-24@desktop u-margin-bottom-24@tablet u-margin-bottom-24@mobile" src="images/avatar-placeholder.svg" alt="{{this.name}} in {{this.show.name}}">
-						{{/if}}
-						<div class="u-text-center@tablet u-text-center@mobile">
-							<h3 class="c-character__title">{{this.name}}</h3>
-							<h4 class="c-character__subtitle">{{../person}}</h4>
-							<h5 class="c-character__subtitle c-character__subtitle--secondary">{{this.show.name}}</h5>
+<div class="o-grid">
+	<div id="carousel" class="c-carousel c-carousel--full">
+		<div class="c-carousel__arrow c-carousel__arrow--prev js-carouselPreviousButton">
+			<i class="icon-arrow-left"></i>
+		</div>
+		<div class="c-carousel__content">
+			<div class="c-carousel__outer">
+				<div class="c-carousel__inner js-carouselSlider">
+					{{#each entry}}
+					{{#compare this.show.id '!==' ../show}}
+					<div class="c-carousel__slide js-carouselSlide">
+						<div class="o-media-object o-media-object--center o-media-object--column@tablet o-media-object--column@mobile c-character c-character--big@desktop">
+							{{#if this.image}}
+							<div class="o-img o-img--circle c-character__avatar u-margin-right-24@desktop u-margin-bottom-24@tablet u-margin-bottom-24@mobile" style="background-image: url({{#https}}{{this.image}}{{/https}})"></div>
+							{{else}}
+							<img class="o-img o-img--circle c-character__avatar u-margin-right-24@desktop u-margin-bottom-24@tablet u-margin-bottom-24@mobile" src="images/avatar-placeholder.svg" alt="{{this.name}} in {{this.show.name}}">
+							{{/if}}
+							<div class="u-text-center@tablet u-text-center@mobile">
+								<h3 class="c-character__title">{{this.name}}</h3>
+								<h4 class="c-character__subtitle">{{../person}}</h4>
+								<h5 class="c-character__subtitle c-character__subtitle--secondary">{{this.show.name}}</h5>
+							</div>
 						</div>
 					</div>
+					{{/compare}}
+					{{/each}}
 				</div>
-				{{/compare}}
-				{{/each}}
 			</div>
 		</div>
-	</div>
-	<div class="c-carousel__arrow c-carousel__arrow--next js-carouselNextButton">
-		<i class="icon-arrow-right"></i>
+		<div class="c-carousel__arrow c-carousel__arrow--next js-carouselNextButton">
+			<i class="icon-arrow-right"></i>
+		</div>
 	</div>
 </div>
 {{/if}}

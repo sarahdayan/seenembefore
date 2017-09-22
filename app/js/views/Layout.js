@@ -44,7 +44,29 @@ define(
 	 * @description Fires initial operations
 	 */
 	Layout.prototype.init = function() {
-		this.registerHelpers();
+		this.registerHelpers()
+			.setupHandlers()
+			.enable();
+	};
+
+	/**
+	 * @function setupHandlers
+	 * @description Binds handlers to methods
+	 * @returns {object}
+	 */
+	Layout.prototype.setupHandlers = function() {
+		this.windowResizeHandler = this.autoSizeInputs.bind(this);
+		return this;
+	};
+
+	/**
+	 * @function enable
+	 * @description Binds events to handlers
+	 * @returns {object}
+	 */
+	Layout.prototype.enable = function() {
+		$(window).on('resize', this.windowResizeHandler);
+		return this;
 	};
 
 	/**
@@ -95,6 +117,19 @@ define(
 	Layout.prototype.displaySection = function(section, args) {
 		this.showSection(section)
 			.injectInSection(section, args);
+		return this;
+	};
+
+	/**
+	 * @function autoSizeInputs
+	 * @description Adapts input width to value or placeholder width
+	 * @param {object} inputs - the inputs to resize.
+	 * @returns {object}
+	*/
+	Layout.prototype.autoSizeInputs = function() {
+		$('.js-autosize').each(function() {
+			autosizeInput($(this).get(0));
+		});
 		return this;
 	};
 
