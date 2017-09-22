@@ -1,9 +1,9 @@
 require.config({
 	paths: {
-		'jquery': '../../node_modules/jquery/dist/jquery.min',
+		'jquery': '../../node_modules/jquery/dist/jquery',
 		'requirejs': '../../node_modules/requirejs/require',
 		'handlebars.runtime': '../../node_modules/handlebars/dist/handlebars.runtime',
-		'autosize-input': '../../node_modules/autosize-input/autosize-input.min',
+		'autosize-input': '../../node_modules/autosize-input/autosize-input',
 		'hammerjs': '../../node_modules/hammerjs/hammer',
 		'typekit': 'https://use.typekit.net/ewf6qzj'
 	},
