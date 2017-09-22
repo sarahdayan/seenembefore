@@ -12,29 +12,14 @@ define(
 	var Layout = function() {
 		this.sections = $('.c-section');
 		this.templates = {
-			load: {
-				div: $('.js-section__load')
-			},
-			form: {
-				div: $('.js-section__form')
-			},
-			search: {
-				div: $('.js-section__search'),
-				template: $('#search')
-			},
-			query: {
-				div: $('.js-section__query'),
-				template: $('#query')
-			},
-			choice: {
-				div: $('.js-section__choice'),
-				template: $('#choice')
-			},
-			results: {
-				div: $('.js-section__results'),
-				template: $('#results')
-			}
+			load: $('.js-section__load'),
+			form: $('.js-section__form'),
+			search: $('.js-section__search'),
+			query: $('.js-section__query'),
+			choice: $('.js-section__choice'),
+			results: $('.js-section__results')
 		};
+		this.children = {};
 
 		this.init();
 	};
@@ -45,8 +30,22 @@ define(
 	 */
 	Layout.prototype.init = function() {
 		this.registerHelpers()
+			.createChildren()
 			.setupHandlers()
 			.enable();
+	};
+
+	/**
+	 * @function createChildren
+	 * @description Stores DOM nodes
+	 * @returns {object}
+	 */
+	Layout.prototype.createChildren = function() {
+		this.children.$window = $(window);
+
+		this.children.autosizeSelector = '.js-autosize';
+
+		return this;
 	};
 
 	/**
@@ -65,7 +64,7 @@ define(
 	 * @returns {object}
 	 */
 	Layout.prototype.enable = function() {
-		$(window).on('resize', this.windowResizeHandler);
+		this.children.$window.on('resize', this.windowResizeHandler);
 		return this;
 	};
 
@@ -90,7 +89,7 @@ define(
 	Layout.prototype.showSection = function(section) {
 		var hiddenClassName = 'u-hidden';
 		this.sections.addClass(hiddenClassName);
-		this.templates[section].div.removeClass(hiddenClassName);
+		this.templates[section].removeClass(hiddenClassName);
 		return this;
 	};
 
@@ -103,7 +102,7 @@ define(
 	 */
 	Layout.prototype.injectInSection = function(section, args) {
 		args = args || {};
-		this.templates[section].div.html(Handlebars.templates[section + '.handlebars.html'](args));
+		this.templates[section].html(Handlebars.templates[section + '.handlebars.html'](args));
 		return this;
 	};
 
@@ -127,7 +126,7 @@ define(
 	 * @returns {object}
 	*/
 	Layout.prototype.autoSizeInputs = function() {
-		$('.js-autosize').each(function() {
+		$(this.children.autosizeSelector).each(function() {
 			autosizeInput($(this).get(0));
 		});
 		return this;
