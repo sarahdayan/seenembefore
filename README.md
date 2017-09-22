@@ -29,6 +29,7 @@ This project uses:
 - [jQuery](https://jquery.com/)
 - [Handlebars](http://handlebarsjs.com/)
 - [RequireJS](http://requirejs.org/)
+- [HammerJS](http://hammerjs.github.io/)
 
 You should not derive from using these.
 
