@@ -4,6 +4,7 @@ require.config({
 		'requirejs': '../../node_modules/requirejs/require',
 		'handlebars.runtime': '../../node_modules/handlebars/dist/handlebars.runtime',
 		'autosize-input': '../../node_modules/autosize-input/autosize-input.min',
+		'hammerjs': '../../node_modules/hammerjs/hammer',
 		'typekit': 'https://use.typekit.net/ewf6qzj'
 	},
 	shim: {

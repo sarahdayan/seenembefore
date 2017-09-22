@@ -1,6 +1,6 @@
 define(
-	['jquery', 'services/Event', 'services/Validator'],
-	function($, Event, Validator) {
+	['jquery', 'services/Event', 'hammerjs', 'services/Validator'],
+	function($, Event, Hammer, Validator) {
 
 	'use strict';
 
@@ -45,9 +45,11 @@ define(
 	 * @returns {object}
 	 */
 	Carousel.prototype.createChildren = function() {
+		this.$body = $('body');
 		this.$prevButton = this.$container.find('.js-carouselPreviousButton');
 		this.$nextButton = this.$container.find('.js-carouselNextButton');
 		this.$slider = this.$container.find('.js-carouselSlider');
+		this.hammertime = new Hammer(this.$slider[0]);
 		return this;
 	};
 
@@ -69,9 +71,21 @@ define(
 	 * @returns {object}
 	 */
 	Carousel.prototype.enable = function() {
+		var self = this;
 		this.setCurrentEvent.attach(this.slideHandler);
 		this.$prevButton.click(this.prevHandler);
 		this.$nextButton.click(this.nextHandler);
+		this.hammertime
+			.on('swiperight', this.prevHandler)
+			.on('swipeleft', this.nextHandler);
+		this.$body.keyup(function(event) {
+			switch(event.keyCode) {
+				case 37: self.prevHandler();
+				break;
+				case 39: self.nextHandler();
+				break;
+			}
+		});
 		return this;
 	};
 
