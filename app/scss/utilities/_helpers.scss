@@ -35,48 +35,26 @@
 // All text manipulations (all benefit from @mobile, @tablet and @desktop modifiers)
 //
 // Markup:
-// <div class="u-text-left">Text left</div>
-// <div class="u-text-left@mobile">Text left on mobile devices</div>
-// <div class="u-text-left@tablet">Text left on tablet devices</div>
-// <div class="u-text-left@desktop">Text left on desktop devices</div>
-// <div class="u-text-right">Text right</div>
 // <div class="u-text-center">Text center</div>
-// <div class="u-text-justify">Text justify</div>
-// <div class="u-text-lowercase">Text lowercase</div>
+// <div class="u-text-center@mobile">Text center on mobile devices</div>
+// <div class="u-text-center@tablet">Text center on tablet devices</div>
+// <div class="u-text-center@desktop">Text center on desktop devices</div>
 // <div class="u-text-uppercase">Text uppercase</div>
 // <div class="u-text-capitalize">Text capitalize</div>
+// <div class="u-text-strong">Text strong</div>
+// <div class="u-text-letterspaced">Text letterspaced</div>
+// <div class="u-text-small">Text small</div>
+// <div class="u-text-large">Text large</div>
+// <div class="u-text-x-large">Text x-large</div>
+// <div class="u-text-xx-large">Text xx-large</div>
 //
 // Styleguide Utilities.Helpers.text
 
 .u-text {
-	&-left {
-		text-align: left;
-		@include responsive-versions {
-			text-align: left;
-		}
-	}
-	&-right {
-		text-align: right;
-		@include responsive-versions {
-			text-align: right;
-		}
-	}
 	&-center {
 		text-align: center;
 		@include responsive-versions {
 			text-align: center;
-		}
-	}
-	&-justify {
-		text-align: justify;
-		@include responsive-versions {
-			text-align: justify;
-		}
-	}
-	&-lowercase {
-		text-transform: lowercase;
-		@include responsive-versions {
-			text-transform: lowercase;
 		}
 	}
 	&-uppercase {
@@ -169,56 +147,5 @@
 	}
 	@include desktop {
 		@include spacing($value, \@desktop)
-	}
-}
-
-// Pull
-//
-// Floats anything to the left or to the right
-//
-// Markup:
-// <div class="u-pull-left">Pull left</div>
-// <div class="u-pull-left@mobile">Pull left for mobile devices</div>
-// <div class="u-pull-left@tablet">Pull left for tablet devices</div>
-// <div class="u-pull-left@desktop">Pull left for desktop devices</div>
-// <div class="u-pull-right">Pull right</div>
-//
-// Styleguide Utilities.Helpers.pull
-
-.u-pull {
-	&-left {
-		float: left;
-		@include responsive-versions {
-			float: left;
-		}
-	}
-	&-right {
-		float: right;
-		@include responsive-versions {
-			float: right;
-		}
-	}
-}
-
-// Clearfix
-//
-// Clears floating at the end of any container
-//
-// Markup:
-// <div class="u-clearfix">
-//     <div class="u-pull-left">Pull left</div>
-//     <div class="u-pull-right">Pull right</div>
-// </div>
-//
-// Styleguide Utilities.Helpers.clearfix
-
-.u-clearfix {
-	&:before,
-	&:after {
-		content: ' ';
-		display: table;
-	}
-	&:after {
-		clear: both;
 	}
 }
