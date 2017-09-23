@@ -17,6 +17,25 @@
 	}
 }
 
+// Nowrap
+//
+// Sets anything to nowrap
+//
+// Markup:
+// <span class="u-nowrap">Nowrap</span>
+// <span class="u-nowrap@mobile">Nowrap for mobile devices</span>
+// <span class="u-nowrap@tablet">Nowrap for tablet devices</span>
+// <span class="u-nowrap@desktop">Nowrap for desktop devices</span>
+//
+// Styleguide Utilities.Helpers.nowrap
+
+.u-nowrap {
+	white-space: nowrap;
+	@include responsive-versions {
+		white-space: nowrap;
+	}
+}
+
 // Pointer
 //
 // Sets a pointer cursor on any element
