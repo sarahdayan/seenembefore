@@ -49,7 +49,7 @@ define(
 		this.$prevButton = this.$container.find('.js-carouselPreviousButton');
 		this.$nextButton = this.$container.find('.js-carouselNextButton');
 		this.$slider = this.$container.find('.js-carouselSlider');
-		this.hammertime = new Hammer(this.$slider[0]);
+		this.hammertime = new Hammer(this.$container.find('.c-carousel__content')[0]);
 		return this;
 	};
 
