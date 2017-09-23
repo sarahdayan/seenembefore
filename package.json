@@ -26,13 +26,13 @@
     "gulp-shell": "^0.6.3",
     "gulp-uglify": "^3.0.0",
     "gulp-useref": "^3.1.2",
-    "hammerjs": "^2.0.8",
     "jshint": "^2.9.5",
     "jshint-stylish": "^2.2.1",
     "run-sequence": "^2.1.0"
   },
   "dependencies": {
     "autosize-input": "^0.4.0",
+    "hammerjs": "^2.0.8",
     "handlebars": "^4.0.10",
     "jquery": "^3.2.1",
     "requirejs": "^2.3.4",
