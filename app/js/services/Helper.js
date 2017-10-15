@@ -3,7 +3,7 @@ define(function() {
 	'use strict';
 
 	/**
-	 * Represents an helper.
+	 * Represents a helper.
 	 * @constructor
 	 */
 	var Helper = function() {};
